@@ -1,0 +1,16 @@
+
+
+{% set syslog = salt['grains.filter_by']({
+    'Debian': {
+        'logstash': 'localhost',
+    },
+    'default': 'Debian',
+}, merge=salt['pillar.get']('collectd',{})) %}
+
+
+{% set logstash = salt['grains.filter_by']({
+    'Debian': {
+        'redis': 'localhost',
+    },
+    'default': 'Debian',
+}, merge=salt['pillar.get']('logstash',{})) %}
