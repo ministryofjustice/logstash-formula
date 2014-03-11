@@ -41,7 +41,7 @@ kibana.git:
     - require:
       - user: kibana
     - context:
-      service_name: kibana
+      appslug: kibana
       is_default: False
       server_name: 'kibana.*'
       root_dir: /srv/kibana/application/current/src
