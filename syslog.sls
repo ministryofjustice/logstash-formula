@@ -1,7 +1,6 @@
 include:
   - bootstrap.syslog
 
-{% if 'shipper' in grains['roles'] or 'aggregator' in grains['roles'] %}
 /etc/rsyslog.d/10-logstash.conf:
   file:
     - managed
@@ -10,4 +9,3 @@ include:
     - watch_in:
       - service: rsyslog
 
-{% endif %}
