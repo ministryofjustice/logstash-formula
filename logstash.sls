@@ -7,7 +7,6 @@
 include:
   - .deps
   - java
-  - nginx
   - redis
 
 #  - log_aggregation.elasticsearch
