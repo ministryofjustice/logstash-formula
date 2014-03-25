@@ -1,4 +1,4 @@
-{% set kibana_rev='v3.0.0milestone4' %}
+{% from "logstash/map.jinja" import kibana with context %}
 {% from 'utils/apps/lib.sls' import app_skeleton with context %}
 
 include:
@@ -12,14 +12,14 @@ kibana.git:
   git:
     - latest
     - name: https://github.com/elasticsearch/kibana.git
-    - rev: {{ kibana_rev }}
-    - target: /srv/kibana/application/{{ kibana_rev }}
+    - rev: {{ kibana.revision }}
+    - target: /srv/kibana/application/{{ kibana.revision }}
 
 
 /srv/kibana/application/current:
   file:
     - symlink
-    - target: /srv/kibana/application/{{ kibana_rev }}
+    - target: /srv/kibana/application/{{ kibana.revision }}
     - makedirs: True
     - watch:
       - git: kibana.git
