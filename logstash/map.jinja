@@ -11,6 +11,11 @@
 {% set logstash = salt['grains.filter_by']({
     'Debian': {
         'redis': 'localhost',
+        'source': {
+            'file': 'logstash-1.2.2-flatjar.jar',
+            'path': 'http://static.dsd.io/packages',
+            'hash': 'md5=f2ec9e54e13428ed6d5c96b218126a0e',
+        },
     },
     'default': 'Debian',
 }, merge=salt['pillar.get']('logstash',{})) %}
