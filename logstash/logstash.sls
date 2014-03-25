@@ -42,7 +42,7 @@ logstash-indexer:
 /etc/init/logstash-indexer.conf:
   file:
     - managed
-    - source: salt://logging/templates/logstash/init/logstash-indexer.conf
+    - source: salt://logstash/templates/logstash/init/logstash-indexer.conf
     - template: jinja
     - context:
       jar_name: {{jar_name}}
@@ -59,7 +59,7 @@ logstash-indexer:
 /etc/logstash/indexer.conf:
   file:
     - managed
-    - source: salt://logging/templates/logstash/indexer.conf
+    - source: salt://logstash/templates/logstash/indexer.conf
     - template: jinja
     - mode: 644
     - user: logstash

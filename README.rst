@@ -19,6 +19,8 @@ Dependencies
 
    `boostrap <https://github.com/ministryofjustice/boostrap-formula>`_
 
+   `utils <https://github.com/ministryofjustice/utils-formula`_
+
    `elasticsearch <https://github.com/ministryofjustice/elasticsearch-formula>`_
 
    `java <https://github.com/ministryofjustice/java-formula>`_

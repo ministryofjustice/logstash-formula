@@ -11,7 +11,7 @@ include:
 /etc/beaver.d/{{appshort}}.conf:
   file:
     - managed
-    - source: salt://logging/templates/beaver/beaver-file.conf
+    - source: salt://logstash/templates/beaver/beaver-file.conf
     - template: jinja
     - context:
       logfile: {{logfile}}

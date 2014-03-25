@@ -50,6 +50,6 @@ kibana.git:
       - service: nginx
 
 
-{% from 'logging/lib.sls' import logship with context %}
+{% from 'logstash/lib.sls' import logship with context %}
 {{ logship('kibana-access', '/var/log/nginx/kibana.access.json', 'nginx', ['nginx','kibana','access'], 'rawjson') }}
 {{ logship('kibana-error',  '/var/log/nginx/kibana.error.log', 'nginx', ['nginx','kibana','error'], 'json') }}

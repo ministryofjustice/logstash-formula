@@ -14,7 +14,7 @@ beaver:
 /etc/beaver.conf:
   file:
     - managed
-    - source: salt://logging/templates/beaver/beaver.conf
+    - source: salt://logstash/templates/beaver/beaver.conf
     - template: jinja
     - watch_in:
       - supervisord: supervise-beaver
