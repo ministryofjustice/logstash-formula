@@ -2,7 +2,8 @@
 logstash
 =======
 
-Formulas to set up and configure the logstash server.
+Formulas to set up and configure the logstash server, or ship logs into a
+central server.
 
 .. note::
 
@@ -19,13 +20,14 @@ Dependencies
 
    `boostrap <https://github.com/ministryofjustice/boostrap-formula>`_
 
-   `utils <https://github.com/ministryofjustice/utils-formula`_
+   `utils <https://github.com/ministryofjustice/utils-formula>`_
 
    `elasticsearch <https://github.com/ministryofjustice/elasticsearch-formula>`_
 
    `java <https://github.com/ministryofjustice/java-formula>`_
 
-   `redis <https://github.com/saltstack-formulas/redis-formula>`_
+   `redis <https://github.com/ministryofjustice/redis-formula>`_ (the one from
+   MoJ, not the saltstack-formulas community repo)
 
    `python <https://github.com/ministryofjustice/python-formula>`_
 
@@ -39,7 +41,7 @@ Available states
 .. contents::
     :local:
 
-``init``
+``server``
 ----------
 
 Install logstash from the system package manager and start the service. This
@@ -48,4 +50,67 @@ has been tested only on Ubuntu 12.04.
 Example usage::
 
     include:
-      - logstash
+      - logstash.server
+
+
+``client``
+-----------
+
+Install beaver for the ability to ship logs to the central logstash server over
+the redis connection specified in the pillar (with a default of localhost db
+#0)
+
+Example usage::
+
+    include:
+      - logstash.client
+
+Example pillar::
+
+    beaver:
+      redis:
+        host: logstash.local
+        port: 6379
+        db: 0
+
+
+``logship`` macro
+-----------
+
+Macro to ship a given log file with beaver to central logstash server.
+
+The macro has the following arguments:
+
+appshort
+  A unique tag for the logfile to ship
+
+logfile
+  The path of the log to monitor and ship
+
+type
+  The type of the entries in this log file. Shows up as the type field in
+  logstash.
+
+  **Default:** ``daemon``
+
+tags
+  List of tags to apply to every message.
+
+  **Default:** ``daemon``, ``error``
+
+format
+  Format to use when sending to logstash. If you have just a line of text this
+  should be ``jsoon`` - if you are already output json to the log then you want
+  this to be ``rawjson``
+
+  **Default:** ``json``
+
+Example usage::
+
+    include:
+      - logstash.client
+
+    {% from 'logstash/lib.sls' import logship with context %}
+    {{ logship('redis-server.log', '/var/log/redis/redis-server.log', 'redis', ['redis','log'], 'json') }}
+
+
