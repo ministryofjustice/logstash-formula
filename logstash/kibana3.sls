@@ -49,6 +49,26 @@ kibana.git:
     - watch_in:
       - service: nginx
 
+# Elastic search proxy for kibana
+/etc/nginx/conf.d/elastic-search.conf:
+  file:
+    - managed
+    - source: salt://nginx/templates/vhost-elasticsearch-proxy.conf
+    - user: root
+    - group: root
+    - mode: 644 
+    - template: jinja
+    - watch_in:
+      - service: nginx
+    - context:
+      appslug: elastic-search
+      is_default: False
+      server_name: 'elastic-search.*'
+      proxy_host: http://localhost
+      proxy_port: 9200
+    - watch_in:
+      - service: nginx
+
 
 {% from 'logstash/lib.sls' import logship with context %}
 {{ logship('kibana-access', '/var/log/nginx/kibana.access.json', 'nginx', ['nginx','kibana','access'], 'rawjson') }}
