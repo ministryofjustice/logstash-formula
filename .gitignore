@@ -4,6 +4,7 @@
 *.so
 
 # Packages
+*.swp
 *.egg
 *.egg-info
 dist
