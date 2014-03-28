@@ -38,7 +38,7 @@ kibana.git:
     - require:
       - user: kibana
     - context:
-      elastic-search-url: http://elasticsearch.demo.lpa.dsd.io:8080
+      elastic_search_url: http://elasticsearch.demo.lpa.dsd.io:8080
 
 /etc/nginx/conf.d/kibana.conf:
   file:
