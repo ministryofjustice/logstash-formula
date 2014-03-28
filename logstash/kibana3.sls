@@ -25,8 +25,20 @@ kibana.git:
       - git: kibana.git
 
 
-#configure it only if hosted on separate host than elastic search
+# configure it only if hosted on separate host than elastic search
 
+/srv/kibana/application/current/src/config.js:
+  file:
+    - managed
+    - source: salt://logstash/templates/kibana/config.js
+    - user: root
+    - group: root
+    - mode: 644 
+    - template: jinja
+    - require:
+      - user: kibana
+     - context:
+       elastic-search-url: http://elasticsearch.demo.lpa.dsd.io:8080
 
 /etc/nginx/conf.d/kibana.conf:
   file:

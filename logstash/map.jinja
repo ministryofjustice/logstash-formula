@@ -1,6 +1,6 @@
 {% set kibana = salt['grains.filter_by']({
     'Debian': {
-        'revision': 'v3.0.0milestone4',
+        'revision': 'v3.0.0milestone5',
     },
     'default': 'Debian',
 }, merge=salt['pillar.get']('kibana', {})) %}
