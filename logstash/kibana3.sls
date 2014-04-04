@@ -63,8 +63,12 @@ kibana.git:
 # Elastic search proxy for kibana
 /etc/nginx/conf.d/elastic-search.conf:
   file:
+    - absent
+
+/etc/nginx/conf.d/elasticsearch.conf:
+  file:
     - managed
-    - source: salt://nginx/templates/vhost-elasticsearch-proxy.conf
+    - source: salt://logstash/templates/vhost-elasticsearch-proxy.conf
     - user: root
     - group: root
     - mode: 644 
@@ -72,9 +76,9 @@ kibana.git:
     - watch_in:
       - service: nginx
     - context:
-      appslug: elastic-search
+      appslug: elasticsearch
       is_default: False
-      server_name: 'elastic-search.*'
+      server_name: 'elasticsearch.*'
       proxy_host: http://localhost
       proxy_port: 9200
     - watch_in:
