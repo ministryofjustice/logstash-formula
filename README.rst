@@ -35,6 +35,8 @@ Dependencies
 
    `firewall <https://github.com/ministryofjustice/firewall-formula>`_
 
+   `nginx <https://github.com/ministryofjustice/nginx-formula>`_
+
 Available states
 ================
 
