@@ -24,6 +24,7 @@ logstash-indexer:
       - file: /etc/logstash/indexer.conf
       - file: /etc/init/logstash-indexer.conf
       - file: /usr/src/packages/{{logstash.source.file}}
+      - file: /etc/logstash/patterns/iptables
 
 
 /usr/src/packages/{{logstash.source.file}}:
@@ -51,6 +52,29 @@ logstash-indexer:
     - user: logstash
     - group: logstash
     - mode: 755
+
+/etc/logstash/patterns:
+  file:
+    - directory
+    - user: logstash
+    - group: logstash
+    - mode: 755
+    - require
+      - file: /etc/logstash
+
+
+/etc/logstash/patterns/iptables:
+  file:
+    - managed
+    - source: salt://logstash/templates/logstash/iptables-pattern
+    - template: jinja
+    - mode: 644
+    - user: logstash
+    - group: logstash
+    - mode: 644
+    - require
+      - file: /etc/logstash/patterns
+
 
 
 /etc/logstash/indexer.conf:
