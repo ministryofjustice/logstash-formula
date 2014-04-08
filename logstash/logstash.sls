@@ -59,7 +59,7 @@ logstash-indexer:
     - user: logstash
     - group: logstash
     - mode: 755
-    - require
+    - require:
       - file: /etc/logstash
 
 
@@ -72,7 +72,7 @@ logstash-indexer:
     - user: logstash
     - group: logstash
     - mode: 644
-    - require
+    - require:
       - file: /etc/logstash/patterns
 
 
