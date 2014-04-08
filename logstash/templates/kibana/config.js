@@ -18,7 +18,7 @@ function (Settings) {
      * elasticsearch host
      * @type {String}
      */
-    elasticsearch: "{{ elastic_search_url }}",
+    elasticsearch: "{{ elasticsearch_url }}",
 
     /**
      * The default ES index to use for storing Kibana specific object
