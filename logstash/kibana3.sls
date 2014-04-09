@@ -61,7 +61,7 @@ kibana.git:
       - service: nginx
 
 # Elastic search proxy for kibana
-/etc/nginx/conf.d/elastic-search.conf:
+/etc/nginx/conf.d/elasticsearch.conf:
   file:
     - absent
 
