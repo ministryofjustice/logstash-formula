@@ -1,6 +1,7 @@
 {% set kibana = salt['grains.filter_by']({
     'Debian': {
         'revision': 'v3.0.0milestone5',
+        'elasticsearch': 'http://"+window.location.hostname+":9200',
     },
     'default': 'Debian',
 }, merge=salt['pillar.get']('kibana', {})) %}
@@ -10,7 +11,7 @@
         'logstash': 'localhost',
     },
     'default': 'Debian',
-}, merge=salt['pillar.get']('syslog',{})) %}
+}, merge=salt['pillar.get']('collectd',{})) %}
 
 
 {% set logstash = salt['grains.filter_by']({
