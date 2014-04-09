@@ -5,6 +5,7 @@ include:
   - .deps
   - java
   - redis
+  - firewall
 
 #  - log_aggregation.elasticsearch
 #  - log_aggregation.agent
