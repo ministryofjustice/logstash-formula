@@ -33,7 +33,7 @@ kibana.git:
     - source: salt://logstash/templates/kibana/config.js
     - user: root
     - group: root
-    - mode: 644 
+    - mode: 644
     - template: jinja
     - require:
       - user: kibana
@@ -62,8 +62,12 @@ kibana.git:
 # Elastic search proxy for kibana
 /etc/nginx/conf.d/elasticsearch.conf:
   file:
+    - absent
+
+/etc/nginx/conf.d/elasticsearch.conf:
+  file:
     - managed
-    - source: salt://nginx/templates/vhost-elasticsearch-proxy.conf
+    - source: salt://logstash/templates/vhost-elasticsearch-proxy.conf
     - user: root
     - group: root
     - mode: 644 
