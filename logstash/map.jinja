@@ -11,7 +11,7 @@
         'logstash': 'localhost',
     },
     'default': 'Debian',
-}, merge=salt['pillar.get']('collectd',{})) %}
+}, merge=salt['pillar.get']('syslog',{})) %}
 
 
 {% set logstash = salt['grains.filter_by']({
