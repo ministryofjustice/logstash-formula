@@ -38,7 +38,6 @@ kibana.git:
     - require:
       - user: kibana
 
-
 /etc/nginx/conf.d/kibana.conf:
   file:
     - managed
@@ -61,6 +60,10 @@ kibana.git:
       - service: nginx
 
 # Elastic search proxy for kibana
+/etc/nginx/conf.d/elasticsearch.conf:
+  file:
+    - absent
+
 /etc/nginx/conf.d/elasticsearch.conf:
   file:
     - managed
