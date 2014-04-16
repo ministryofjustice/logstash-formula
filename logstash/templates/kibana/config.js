@@ -1,3 +1,4 @@
+{% from "logstash/map.jinja" import kibana with context %}
 /**
  * These is the app's configuration, If you need to configure
  * the default dashboard, please see dashboards/default
@@ -18,7 +19,7 @@ function (Settings) {
      * elasticsearch host
      * @type {String}
      */
-    elasticsearch: "{{ elastic_search_url }}",
+    elasticsearch: "{{ kibana.elasticsearch }}",
 
     /**
      * The default ES index to use for storing Kibana specific object

@@ -62,6 +62,10 @@ kibana.git:
 # Elastic search proxy for kibana
 /etc/nginx/conf.d/elasticsearch.conf:
   file:
+    - absent
+
+/etc/nginx/conf.d/elasticsearch.conf:
+  file:
     - managed
     - source: salt://logstash/templates/vhost-elasticsearch-proxy.conf
     - user: root
