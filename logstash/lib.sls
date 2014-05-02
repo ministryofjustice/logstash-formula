@@ -20,6 +20,6 @@ include:
       tags: {{tags}}
       delimiter: "{{delimiter}}"
     - watch_in:
-      - supervisord: supervise-beaver
+      - service: beaver
 
 {%- endmacro %}

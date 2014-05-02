@@ -31,8 +31,6 @@ Dependencies
 
    `python <https://github.com/ministryofjustice/python-formula>`_
 
-   `supervisor <https://github.com/ministryofjustice/supervisor-formula>`_
-
    `firewall <https://github.com/ministryofjustice/firewall-formula>`_
 
    `nginx <https://github.com/ministryofjustice/nginx-formula>`_

@@ -6,11 +6,6 @@ include:
   - java
   - redis
 
-#  - log_aggregation.elasticsearch
-#  - log_aggregation.agent
-#  - log_aggregation.kibana
-
-
 {{ app_skeleton('logstash') }}
 
 
@@ -40,7 +35,7 @@ logstash-indexer:
 /etc/init/logstash-indexer.conf:
   file:
     - managed
-    - source: salt://logstash/templates/logstash/init/logstash-indexer.conf
+    - source: salt://logstash/templates/logstash/upstart-logstash-indexer.conf
     - template: jinja
     - context:
       jar_name: {{logstash.source.file}}
