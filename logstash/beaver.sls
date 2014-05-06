@@ -6,7 +6,7 @@ beaver:
   pip.installed:
     - require:
       - pkg: python-pip
-  service:
+  service.running:
     - require:
       - pip: beaver
       - file: /etc/init/beaver.conf
