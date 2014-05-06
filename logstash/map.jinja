@@ -15,7 +15,7 @@
 
 {% set logstash = salt['grains.filter_by']({
     'Debian': {
-        'redis': 'localhost',
+        'redis': 'monitoring.local',
         'source': {
             'file': 'logstash-1.2.2-flatjar.jar',
             'path': 'http://static.dsd.io/packages',
@@ -29,7 +29,7 @@
 {% set beaver = salt['grains.filter_by']({
     'Debian': {
         'redis': {
-            'host': 'localhost',
+            'host': 'monitoring.local',
             'port': 6379,
             'db': 0,
         },
