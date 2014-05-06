@@ -12,6 +12,9 @@ beaver:
       - file: /etc/init/beaver.conf
 
 
+/etc/supervisor.d/beaver.conf:
+  file.absent
+
 /etc/beaver.conf:
   file:
     - managed
