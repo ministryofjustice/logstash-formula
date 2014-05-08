@@ -9,3 +9,11 @@ include:
     - watch_in:
       - service: rsyslog
 
+/etc/rsyslog.conf:
+  file:
+    - managed
+    - source: salt://logstash/templates/syslog/rsyslog.conf
+    - template: jinja
+    - watch_in:
+      - service: rsyslog
+
