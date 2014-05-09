@@ -9,9 +9,9 @@ beaver:
   service.running:
     - require:
       - pip: beaver
-      - watch:
-        - file: /etc/init/beaver.conf
-        - file: /etc/beaver.conf
+    - watch:
+      - file: /etc/init/beaver.conf
+      - file: /etc/beaver.conf
 
 
 /etc/supervisor.d/beaver.conf:
