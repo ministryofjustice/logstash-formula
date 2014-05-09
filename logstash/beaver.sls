@@ -9,7 +9,9 @@ beaver:
   service.running:
     - require:
       - pip: beaver
-      - file: /etc/init/beaver.conf
+      - watch:
+        - file: /etc/init/beaver.conf
+        - file: /etc/beaver.conf
 
 
 /etc/supervisor.d/beaver.conf:
@@ -20,8 +22,6 @@ beaver:
     - managed
     - source: salt://logstash/templates/beaver/beaver.conf
     - template: jinja
-    - watch_in:
-      - service: beaver
 
 
 /etc/beaver.d:
