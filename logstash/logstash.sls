@@ -70,6 +70,8 @@ logstash-indexer:
     - mode: 644
     - user: logstash
     - group: logstash
+    - require:
+      - file: /etc/logstash
 
 
 {% from 'firewall/lib.sls' import firewall_enable with  context %}
