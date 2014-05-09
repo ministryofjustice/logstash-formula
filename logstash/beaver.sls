@@ -27,7 +27,7 @@ beaver:
 /etc/beaver.d:
   file:
     - directory
-  order: 2
+    - order: 2
 
 /etc/init/beaver.conf:
   file.managed:
