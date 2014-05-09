@@ -1,3 +1,7 @@
+## Version 1.0.2
+
+* Fixed YAML layout causing highstate failure
+
 ## Version 1.0.1
 
 * Replaced supervisord with upstart for beaver - fixes beaver restart problem
