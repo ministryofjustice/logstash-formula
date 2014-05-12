@@ -62,7 +62,7 @@ Required pillar variables
   Example::
 
     kibana:
-      elasticsearch_url: http://elasticsearch.project.demo.dsd.io:8080
+      elasticsearch: http://elasticsearch.project.demo.dsd.io:8080
 
 
 ``client``
