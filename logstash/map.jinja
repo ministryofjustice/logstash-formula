@@ -22,6 +22,10 @@
             'path': 'http://static.dsd.io/packages',
             'hash': 'md5=f2ec9e54e13428ed6d5c96b218126a0e',
         },
+        'elasticsearch': {
+            'host': 'monitoring.local',
+            'port': 9200,
+        }
     },
     'default': 'Debian',
 }, merge=salt['pillar.get']('logstash',{})) %}
