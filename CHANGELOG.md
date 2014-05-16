@@ -1,4 +1,4 @@
-## master (awaiting release)
+## Version 1.0.3
 
 * Updated elasticsearch formula dependency to v1.0.2
 * Added logstash.elasticsearch pillar variables defined in map.jinja
