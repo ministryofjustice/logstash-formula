@@ -1,5 +1,7 @@
 ## master (awaiting release)
 
+* Added logstash.elasticsearch pillar variables defined in map.jinja
+* Updated kibana to dynamically use elasticsearch.<domain>:8080 by default
 * Renamed elasticsearch references and internalised nginx vhost config
 * Added config and patterns for handling auditd log entries
 * Fixed dependencies for beaver/logstash config directories to enforce highstate order
