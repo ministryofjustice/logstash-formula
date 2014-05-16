@@ -1,3 +1,7 @@
+## master (awaiting release)
+
+* Fixed dependencies for beaver/logstash config directories to enforce highstate order
+
 ## Version 1.0.2
 
 * Fixed YAML layout causing highstate failure
