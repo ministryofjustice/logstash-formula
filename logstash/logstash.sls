@@ -19,7 +19,7 @@ logstash-indexer:
       - file: /etc/logstash/indexer.conf
       - file: /etc/init/logstash-indexer.conf
       - file: /usr/src/packages/{{logstash.source.file}}
-      - file: /etc/logstash/patterns/iptables
+      - file: /etc/logstash/patterns
 
 
 /usr/src/packages/{{logstash.source.file}}:
