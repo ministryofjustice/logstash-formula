@@ -1,5 +1,6 @@
 ## master (awaiting release)
 
+* Renamed elasticsearch references and internalised nginx vhost config
 * Added config and patterns for handling auditd log entries
 * Fixed dependencies for beaver/logstash config directories to enforce highstate order
 
