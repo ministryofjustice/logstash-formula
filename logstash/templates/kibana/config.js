@@ -1,3 +1,4 @@
+{% from "logstash/map.jinja" import kibana with context %}
 /**
  * These is the app's configuration, If you need to configure
  * the default dashboard, please see dashboards/default
