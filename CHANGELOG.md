@@ -1,5 +1,6 @@
 ## master (awaiting release)
 
+* Updated elasticsearch formula dependency to v1.0.2
 * Added logstash.elasticsearch pillar variables defined in map.jinja
 * Updated kibana to dynamically use elasticsearch.<domain>:8080 by default
 * Renamed elasticsearch references and internalised nginx vhost config
