@@ -1,3 +1,7 @@
+## Version 1.0.4
+
+* Ensure all salt related logs (minion,master,keys) are shipped from beaver
+
 ## Version 1.0.3
 
 * Updated elasticsearch formula dependency to v1.0.2
