@@ -33,12 +33,11 @@ kibana.git:
     - source: salt://logstash/templates/kibana/config.js
     - user: root
     - group: root
-    - mode: 644 
+    - mode: 644
     - template: jinja
     - require:
       - user: kibana
-    - context:
-      elastic_search_url: http://{{kibana.elasticsearch}}:8080
+
 
 /etc/nginx/conf.d/kibana.conf:
   file:

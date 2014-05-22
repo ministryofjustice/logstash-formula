@@ -5,6 +5,7 @@ include:
   - .deps
   - java
   - redis
+  - firewall
 
 {{ app_skeleton('logstash') }}
 
@@ -69,7 +70,6 @@ logstash-indexer:
     - mode: 644
     - user: logstash
     - group: logstash
-    - mode: 644
     - require:
       - file: /etc/logstash
 

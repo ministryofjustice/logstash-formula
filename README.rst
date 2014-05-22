@@ -52,6 +52,18 @@ Example usage::
     include:
       - logstash.server
 
+Required pillar variables
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- elasticsearch_url
+
+  Url at which an external browser can reach the elasticsearch service
+
+  Example::
+
+    kibana:
+      elasticsearch: http://elasticsearch.project.demo.dsd.io:8080
+
 
 ``client``
 -----------
