@@ -1,6 +1,6 @@
 git@github.com:ministryofjustice/bootstrap-formula.git==v1.0.0
 git@github.com:ministryofjustice/utils-formula.git==v1.0.0
-git@github.com:ministryofjustice/elasticsearch-formula.git==v1.0.0
+git@github.com:ministryofjustice/elasticsearch-formula.git==v1.0.2
 git@github.com:ministryofjustice/java-formula.git==v1.0.0
 git@github.com:ministryofjustice/python-formula.git==v1.0.0
 git@github.com:ministryofjustice/redis-formula.git==v1.0.0

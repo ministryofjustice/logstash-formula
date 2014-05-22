@@ -21,5 +21,7 @@ include:
       delimiter: "{{delimiter}}"
     - watch_in:
       - service: beaver
+    - require:
+      - file: /etc/beaver.d
 
 {%- endmacro %}
