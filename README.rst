@@ -52,6 +52,16 @@ Example usage::
     include:
       - logstash.server
 
+Pillar variables
+~~~~~~~~~~~~~~~~
+
+- kibana:elasticsearch
+
+  The URL at which the ElasticSearch server can be reached by the client
+  browser. The default is to take the current host:port and replace the
+  'kibana' part of the hostname with 'elasticsearch' - override this if it is
+  not what you want.
+
 
 ``client``
 -----------
