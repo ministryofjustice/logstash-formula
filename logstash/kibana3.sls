@@ -37,8 +37,6 @@ kibana.git:
     - template: jinja
     - require:
       - user: kibana
-    - context:
-      elastic_search_url: http://{{kibana.elasticsearch}}:8080
 
 /etc/nginx/conf.d/kibana.conf:
   file:

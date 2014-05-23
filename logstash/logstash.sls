@@ -5,6 +5,7 @@ include:
   - .deps
   - java
   - redis
+  - firewall
 
 {{ app_skeleton('logstash') }}
 
