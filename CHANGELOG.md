@@ -1,5 +1,9 @@
 ## Version 1.0.4
 
+* Configurable easticsearch host address and javascript based default for it
+
+## Version 1.0.4
+
 * Ensure all salt related logs (minion,master,keys) are shipped from beaver
 
 ## Version 1.0.3
