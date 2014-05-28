@@ -1,3 +1,7 @@
+## Version 1.0.6
+
+* Depend on more recent version of python-formula
+
 ## Version 1.0.5
 
 * Configurable easticsearch host address and javascript based default for it
