@@ -5,6 +5,7 @@ include:
 #}
 
 {% macro logship(appshort, logfile, type='daemon', tags=['daemon','error'], format='json', delimiter='\\\\n') -%}
+{% if 'monitoring' in grains %}
 
 {% set tags = ','.join(tags) %}
 
@@ -24,4 +25,5 @@ include:
     - require:
       - file: /etc/beaver.d
 
+{% endif %}
 {%- endmacro %}
