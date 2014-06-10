@@ -110,7 +110,7 @@ tags
 
 format
   Format to use when sending to logstash. If you have just a line of text this
-  should be ``jsoon`` - if you are already output json to the log then you want
+  should be ``json`` - if you are already output json to the log then you want
   this to be ``rawjson``
 
   **Default:** ``json``
