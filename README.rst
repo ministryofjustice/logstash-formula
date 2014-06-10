@@ -62,6 +62,11 @@ Pillar variables
   'kibana' part of the hostname with 'elasticsearch' - override this if it is
   not what you want.
 
+- monitoring
+
+  If evaluates to True than client side of monitoring will be installed. Later
+  monitoring will prefix the metrics using the value of pillar.monitoring.
+
 
 ``client``
 -----------
