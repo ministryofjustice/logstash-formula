@@ -1,6 +1,6 @@
-## Version 2.0.0
+## Version 1.0.7
 
-* Allow to enable/disable client monitoring. WARNING: By default it's disabled
+* Allow to enable/disable client monitoring. By default it's enabled.
 
 ## Version 1.0.6
 

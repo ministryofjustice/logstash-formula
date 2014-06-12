@@ -62,10 +62,13 @@ Pillar variables
   'kibana' part of the hostname with 'elasticsearch' - override this if it is
   not what you want.
 
-- monitoring
+- monitoring:enabled (default True)
 
-  If evaluates to True than client side of monitoring will be installed. Later
-  monitoring will prefix the metrics using the value of pillar.monitoring.
+  Used to configure whether monitoring should be enabled/installed at all.
+  It's useful as client side of monitoring is an implicit dependency.
+
+- monitoring:ns (future)
+  TODO: Monitoring shall prefix the metrics using this value.
 
 
 ``client``
