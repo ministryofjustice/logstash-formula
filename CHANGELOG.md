@@ -1,3 +1,7 @@
+## Version 1.0.7
+
+* Allow to enable/disable client monitoring. By default it's enabled.
+
 ## Version 1.0.6
 
 * Depend on more recent version of python-formula
