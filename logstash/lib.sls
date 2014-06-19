@@ -5,7 +5,7 @@ include:
 #}
 
 {% macro logship(appshort, logfile, type='daemon', tags=['daemon','error'], format='json', delimiter='\\\\n') -%}
-{% if pillar.get('monitoring:enabled',True) %}
+{% if salt['pillar.get']('monitoring:enabled', True) %}
 
 {% set tags = ','.join(tags) %}
 
