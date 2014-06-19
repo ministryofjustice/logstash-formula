@@ -38,5 +38,5 @@ beaver:
     - source: salt://logstash/files/beaver_apparmor_profile
     - template: 'jinja'
     - watch_in:
-      - command: reload-profiles
+      - cmd: reload-profiles
       - service: beaver
