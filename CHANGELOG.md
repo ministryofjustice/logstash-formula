@@ -1,3 +1,7 @@
+## Version 1.0.8
+
+* Fix for Allow to enable/disable client monitoring
+
 ## Version 1.0.7
 
 * Allow to enable/disable client monitoring. By default it's enabled.
