@@ -1,0 +1,26 @@
+#include <tunables/global>
+
+/usr/local/bin/beaver {{salt['pillar.get']('apparmor:profiles:nginx', '')}}  {
+  #include <abstractions/apache2-common>
+  #include <abstractions/base>
+  #include <abstractions/python>
+
+  capability dac_override,
+
+  /bin/dash rix,
+  /bin/uname rix,
+  /etc/beaver.conf r,
+  /etc/beaver.d/ r,
+  /etc/beaver.d/* r,
+  /etc/lsb-release r,
+  /proc/*/mounts r,
+  /run/shm/* lrw,
+  /sbin/ldconfig rix,
+  /sbin/ldconfig.real rix,
+  /usr/bin/python2.7 ix,
+  /usr/local/bin/beaver r,
+  /var/log/** r,
+  /srv/pvb/application/shared/log/* r,
+
+  #include <beaver_local>
+}
