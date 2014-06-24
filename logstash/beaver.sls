@@ -33,10 +33,15 @@ beaver:
     - source: salt://logstash/templates/beaver/upstart-beaver.conf
     - template: jinja
 
+/etc/apparmor.d/beaver_local:
+  file.directory:
+    - mode: 755
+    - user: root
+    - group: root
+
 /etc/apparmor.d/usr.local.bin.beaver:
   file.managed:
-    - source: salt://logstash/files/beaver_apparmor_profile
-    - template: 'jinja'
+    - source: salt://logstash/templates/beaver_apparmor_profile
+    - template: jinja
     - watch_in:
-      - cmd: reload-profiles
       - service: beaver
