@@ -52,8 +52,7 @@ logstash-indexer:
 /etc/logstash/patterns:
   file:
     - recurse
-    - source: salt://logstash/templates/logstash/patterns
-    - template: jinja
+    - source: salt://logstash/files/logstash/patterns
     - file_mode: 644
     - dir_mode: 755
     - user: logstash
