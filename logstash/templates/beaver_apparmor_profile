@@ -1,6 +1,6 @@
 #include <tunables/global>
 
-/usr/local/bin/beaver {{salt['pillar.get']('apparmor:profiles:nginx', '')}}  {
+/usr/local/bin/beaver {{salt['pillar.get']('apparmor:profiles:beaver:enforce', 'flags=(complain)')}}  {
   #include <abstractions/apache2-common>
   #include <abstractions/base>
   #include <abstractions/python>
