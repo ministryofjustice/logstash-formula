@@ -1,3 +1,7 @@
+## Version 1.1.x
+
+* Create a basic apparmor profile for logstash and related services.
+
 ## Version 1.0.8
 
 * Fix for Allow to enable/disable client monitoring

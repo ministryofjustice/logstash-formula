@@ -79,6 +79,14 @@ kibana.git:
     - watch_in:
       - service: nginx
 
+/etc/apparmor.d/nginx_local/kibana:
+  file.managed:
+    - source: salt://logstash/templates/kibana/kibana_apparmor_profile
+    - template: jinja
+    - watch_in:
+      - service: nginx
+    - require:
+      - file: /etc/apparmor.d/nginx_local
 
 {% from 'logstash/lib.sls' import logship with context %}
 {{ logship('kibana-access', '/var/log/nginx/kibana.access.json', 'nginx', ['nginx','kibana','access'], 'rawjson') }}

@@ -132,3 +132,21 @@ Example usage::
     {{ logship('redis-server.log', '/var/log/redis/redis-server.log', 'redis', ['redis','log'], 'json') }}
 
 
+apparmor
+========
+
+This formula includes some simple default apparmor profiles for beaver, and
+adds additions to the nginx profile to allow access to kibana and grafana
+webroots.
+
+App armor is by default in complain mode which means it allows the action and
+logs. To make it deny actions that the beaver profile doesn't cover set the
+following pillar::
+
+    apparmor:
+      profiles:
+        beaver:
+          enforce: ''
+        # We need to set the same mode on nginx for kibana and grafana too
+        nginx:
+          encorce: ''
