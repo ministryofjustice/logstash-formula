@@ -1,4 +1,4 @@
-## Version 1.1.x
+## Version 1.1.0
 
 * Create a basic apparmor profile for logstash and related services.
 
