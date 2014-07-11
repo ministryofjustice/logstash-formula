@@ -1,0 +1,10 @@
+# rsyslog promisses high precision format
+# and delivers high precision format
+# only if high precision timestamp value was available
+#
+# i.e.
+# if you send low precision timestamp to rsyslog
+# and later use rsyslog to route it somewhere else
+# than time will not miraculously increase it's granularity
+
+RSYSLOGTIMESTAMP (\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?\+\d\d:\d\d)

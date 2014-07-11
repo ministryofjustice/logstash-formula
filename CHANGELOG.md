@@ -1,3 +1,9 @@
+## Version 1.x
+
+* Parses haproxy logs (uses haproxy as a source of timestamp to avoid syslog delay)
+* Simplifies aggregation over x-request-id
+* Enables and parses high resolution rsyslog timestamp
+
 ## Version 1.1.0
 
 * Create a basic apparmor profile for logstash and related services.
