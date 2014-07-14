@@ -1,3 +1,7 @@
+## Version 1.2.0
+
+* Process auditd logs, including apparmor via auditd
+
 ## Version 1.1.0
 
 * Create a basic apparmor profile for logstash and related services.
