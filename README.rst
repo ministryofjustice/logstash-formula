@@ -18,7 +18,7 @@ Dependencies
 
    This formula has a dependency on the following salt formulas:
 
-   `boostrap <https://github.com/ministryofjustice/boostrap-formula>`_
+   `bootstrap <https://github.com/ministryofjustice/bootstrap-formula>`_
 
    `utils <https://github.com/ministryofjustice/utils-formula>`_
 
