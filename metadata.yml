@@ -23,4 +23,4 @@ test_states:
     host.present:
       - ip: 127.0.0.1
       - names:
-      - monitoring.local
+        - monitoring.local
