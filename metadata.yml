@@ -20,7 +20,7 @@ grains:
 
 test_states:
   monitoring_local:
-  host.present:
-    - ip: 127.0.0.1
-    - names:
-    - monitoring.local
+    host.present:
+      - ip: 127.0.0.1
+      - names:
+      - monitoring.local
