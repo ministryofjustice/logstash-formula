@@ -9,9 +9,10 @@ BEGIN {
 }
 
 module TestHelpers
+  TEST_SYSLOG_PORT =  22514
 
   def test_syslog_message(message, &block)
-    socket = Stud.try(5.times) { TCPSocket.new("127.0.0.1", 2514) }
+    socket = Stud.try(5.times) { TCPSocket.new("127.0.0.1", TEST_SYSLOG_PORT) }
     socket.puts message
     event = @queue.pop
     begin
@@ -19,6 +20,36 @@ module TestHelpers
     rescue
       pp event.to_hash
       raise
+    end
+  end
+
+  # We want to test with the 'Real' config as much as possible. But we only
+  # want input from the test, not from the host at large. So we alter the
+  # config and replace the inputs section
+  #
+  # This was done by putting logstash into debug mode and then looking at what
+  # the code it generated. If this proves too flakey in the future an
+  # alternative would be to regex out the input{...} block out and replace that
+  def alter_pipeline_inputs(pipeline)
+    port = TEST_SYSLOG_PORT
+    pipeline.instance_eval do
+      @inputs = []
+      @inputs << plugin("input", "tcp", LogStash::Util.hash_merge_many({ "port" => port }, { "type" => ("syslog".force_encoding("UTF-8")) }))
+    end
+  end
+
+  def test_logstash(&block)
+    instance_eval do
+      # Cribbed from https://github.com/elasticsearch/logstash/blob/0d18814d024b4dc65382de7b6e1366381b16b561/spec/inputs/syslog.rb
+      input do |pipeline, queue|
+        @queue = queue
+        alter_pipeline_inputs(pipeline)
+
+        Thread.new { pipeline.run }
+        sleep 0.1 while !pipeline.ready?
+
+        instance_exec &block
+      end
     end
   end
 
@@ -32,12 +63,7 @@ describe "syslog messages", :socket => true do
   # TODO: Make sure the config files match what we pass to upstart?
   config [ '/etc/logstash/indexer.conf' ].map { |fn| File.open(fn).read }.reduce(:+)
 
-  # Cribbed from https://github.com/elasticsearch/logstash/blob/0d18814d024b4dc65382de7b6e1366381b16b561/spec/inputs/syslog.rb
-  input do |pipeline, queue|
-    @queue = queue
-
-    Thread.new { pipeline.run }
-    sleep 0.1 while !pipeline.ready?
+  test_logstash do
 
     # iptables logs
 
