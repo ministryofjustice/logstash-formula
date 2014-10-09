@@ -1,14 +1,26 @@
 dependencies:
-- git@github.com:ministryofjustice/bootstrap-formula.git
-- git@github.com:ministryofjustice/utils-formula.git
-- git@github.com:ministryofjustice/elasticsearch-formula.git
-- git@github.com:ministryofjustice/java-formula.git
-- git@github.com:ministryofjustice/python-formula.git
-- git@github.com:ministryofjustice/redis-formula.git
-- git@github.com:ministryofjustice/firewall-formula.git
-- git@github.com:ministryofjustice/nginx-formula.git
-- git@github.com:ministryofjustice/apparmor-formula.git
+  - git@github.com:ministryofjustice/bootstrap-formula.git
+  - git@github.com:ministryofjustice/utils-formula.git
+  - git@github.com:ministryofjustice/elasticsearch-formula.git
+  - git@github.com:ministryofjustice/java-formula.git
+  - git@github.com:ministryofjustice/python-formula.git
+  - git@github.com:ministryofjustice/redis-formula.git
+  - git@github.com:ministryofjustice/firewall-formula.git
+  - git@github.com:ministryofjustice/nginx-formula.git
+  - git@github.com:ministryofjustice/apparmor-formula.git
 
 entry:
- - logstash.server
- - logstash.client
+  - logstash.server
+  - logstash.client
+
+grains:
+  roles:
+    - monitoring.server
+    - monitoring.client
+
+test_states:
+  monitoring_local:
+    host.present:
+      - ip: 127.0.0.1
+      - names:
+        - monitoring.local

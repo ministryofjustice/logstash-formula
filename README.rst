@@ -150,3 +150,14 @@ following pillar::
         # We need to set the same mode on nginx for kibana and grafana too
         nginx:
           encorce: ''
+
+
+
+Running Vagrant Tests
+============
+
+To run the test suite under Vagrant:
+
+  vagrant up
+  vagrant ssh
+  sudo /vagrant/custom-test/run.sh
