@@ -1,7 +1,3 @@
-entry:
-  - logstash.server
-  - logstash.client
-
 dependencies:
   - git@github.com:ministryofjustice/bootstrap-formula.git
   - git@github.com:ministryofjustice/utils-formula.git
@@ -12,6 +8,10 @@ dependencies:
   - git@github.com:ministryofjustice/firewall-formula.git
   - git@github.com:ministryofjustice/nginx-formula.git
   - git@github.com:ministryofjustice/apparmor-formula.git
+
+entry:
+  - logstash.server
+  - logstash.client
 
 grains:
   roles:
