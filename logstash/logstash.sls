@@ -9,45 +9,36 @@ include:
 
 {{ app_skeleton('logstash') }}
 
+logstash_repo:
+  pkgrepo.managed:
+    - humanname: Logstash PPA
+    - name: deb http://packages.elasticsearch.org/logstash/1.4/debian stable main
+    - dist: trusty
+    - file: /etc/apt/sources.list.d/logstash.list
+    - keyid: D88E42B4
+    - keyserver: keyserver.ubuntu.com
+    - require_in:
+      - pkg: logstash
 
-logstash-indexer:
-  service:
-    - running
+
+logstash:
+  pkg.installed:
+    - require:
+      - pkgrepo: logstash_repo
+  
+logstash:
+  service.running:
     - enable: True
     - require:
-      - user: logstash
+      - pkg: logstash
     - watch:
-      - file: /etc/logstash/indexer.conf
-      - file: /etc/init/logstash-indexer.conf
+      - file: /etc/logstash/conf.d/indexer.conf
+      - file: /etc/default/logstash
+      - file: /etc/init/logstash.conf
       - file: /usr/src/packages/{{logstash.source.file}}
       - file: /etc/logstash/patterns
 
 
-/usr/src/packages/{{logstash.source.file}}:
-  file:
-    - managed
-    - source: http://static.dsd.io/packages/{{logstash.source.file}}
-    - source_hash: {{logstash.source.hash}}
-    - mode: 644
-    - require:
-      - file: /usr/src/packages
-
-
-/etc/init/logstash-indexer.conf:
-  file:
-    - managed
-    - source: salt://logstash/templates/logstash/upstart-logstash-indexer.conf
-    - template: jinja
-    - context:
-      jar_name: {{logstash.source.file}}
-
-
-/etc/logstash:
-  file:
-    - directory
-    - user: logstash
-    - group: logstash
-    - mode: 755
 
 /etc/logstash/patterns:
   file:
@@ -59,10 +50,10 @@ logstash-indexer:
     - user: logstash
     - group: logstash
     - require:
-      - file: /etc/logstash
+      - pkg: logstash
 
 
-/etc/logstash/indexer.conf:
+/etc/logstash/conf.d/indexer.conf:
   file:
     - managed
     - source: salt://logstash/templates/logstash/indexer.conf
@@ -72,7 +63,9 @@ logstash-indexer:
     - group: logstash
     - mode: 644
     - require:
-      - file: /etc/logstash
+      - pkg: logstash
+    - require_in: 
+      - service: logstash
 
 
 {% from 'firewall/lib.sls' import firewall_enable with  context %}
