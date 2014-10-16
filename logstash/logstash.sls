@@ -25,8 +25,6 @@ logstash:
   pkg.installed:
     - require:
       - pkgrepo: logstash_repo
-  
-logstash:
   service.running:
     - enable: True
     - require:
