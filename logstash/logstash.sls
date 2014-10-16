@@ -13,27 +13,23 @@ logstash_repo:
   pkgrepo.managed:
     - humanname: Logstash PPA
     - name: deb http://packages.elasticsearch.org/logstash/1.4/debian stable main
-    - dist: trusty
     - file: /etc/apt/sources.list.d/logstash.list
     - keyid: D88E42B4
     - keyserver: keyserver.ubuntu.com
-    - require_in:
-      - pkg: logstash
 
 
-logstash:
+logstash_indexer:
   pkg.installed:
+    - name: logstash
     - require:
       - pkgrepo: logstash_repo
   service.running:
     - enable: True
+    - name: logstash
     - require:
-      - pkg: logstash
+      - pkg: logstash_indexer
     - watch:
       - file: /etc/logstash/conf.d/indexer.conf
-      - file: /etc/default/logstash
-      - file: /etc/init/logstash.conf
-      - file: /usr/src/packages/{{logstash.source.file}}
       - file: /etc/logstash/patterns
 
 
@@ -48,7 +44,7 @@ logstash:
     - user: logstash
     - group: logstash
     - require:
-      - pkg: logstash
+      - pkg: logstash_indexer
 
 
 /etc/logstash/conf.d/indexer.conf:
@@ -61,9 +57,9 @@ logstash:
     - group: logstash
     - mode: 644
     - require:
-      - pkg: logstash
+      - pkg: logstash_indexer
     - require_in: 
-      - service: logstash
+      - service: logstash_indexer
 
 
 {% from 'firewall/lib.sls' import firewall_enable with  context %}
