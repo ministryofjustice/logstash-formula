@@ -29,7 +29,6 @@ logstash_indexer:
     - require:
       - pkg: logstash_indexer
     - watch:
-      - file: /etc/logstash/conf.d/indexer.conf
       - file: /etc/logstash/patterns
 
 
@@ -47,10 +46,12 @@ logstash_indexer:
       - pkg: logstash_indexer
 
 
-/etc/logstash/conf.d/indexer.conf:
+{% for conf_file in logstash.config_files %}
+
+/etc/logstash/conf.d/{{ conf_file }}:
   file:
     - managed
-    - source: salt://logstash/templates/logstash/indexer.conf
+    - source: salt://logstash/templates/logstash/conf.d/{{ conf_file }}
     - template: jinja
     - mode: 644
     - user: logstash
@@ -58,8 +59,10 @@ logstash_indexer:
     - mode: 644
     - require:
       - pkg: logstash_indexer
-    - require_in: 
+    - watch_in:
       - service: logstash_indexer
+
+{% endfor %}
 
 
 {% from 'firewall/lib.sls' import firewall_enable with  context %}

@@ -22,6 +22,12 @@
             'path': 'http://static.dsd.io/packages',
             'hash': 'md5=f2ec9e54e13428ed6d5c96b218126a0e',
         },
+        'config_files': [
+            '100_input_syslog.conf',
+            '101_input_redis.conf',
+            '200_filter_all.conf',
+            '900_output_elasticsearch.conf'
+        ],
         'elasticsearch': {
             'host': 'monitoring.local',
             'port': 9200,
