@@ -61,6 +61,21 @@ logstash-indexer:
     - require:
       - file: /etc/logstash
 
+/data/logstash:
+  file.directory:
+    - mode: 2750
+    - user: logstash
+    - group: adm
+    - require:
+      - file: /data
+
+/data/logstash/indexer:
+  file.directory:
+    - mode: 2750
+    - user: logstash
+    - group: adm
+    - require:
+      - file: /data/logstash
 
 /etc/logstash/indexer.conf:
   file:
@@ -73,6 +88,7 @@ logstash-indexer:
     - mode: 644
     - require:
       - file: /etc/logstash
+      - file: /data/logstash/indexer
 
 
 {% from 'firewall/lib.sls' import firewall_enable with  context %}

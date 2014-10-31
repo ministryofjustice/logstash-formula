@@ -17,6 +17,7 @@
 {% set logstash = salt['grains.filter_by']({
     'Debian': {
         'redis': 'monitoring.local',
+        'version': '1.2.2',
         'source': {
             'file': 'logstash-1.2.2-flatjar.jar',
             'path': 'http://static.dsd.io/packages',
