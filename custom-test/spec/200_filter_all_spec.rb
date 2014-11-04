@@ -66,8 +66,17 @@ describe "200_filter_all", :our_filters => true do
     line = %q{<5>Aug 29 13:41:59 ip-172-31-18-91 kernel: [   15.199355] type=1400 audit(1409319719.698:10): apparmor="STATUS" operation="profile_replace" name="/usr/lib/connman/scripts/dhclient-script" pid=777 comm="apparmor_parser"}
     sample "message" => line, "type" => 'syslog' do
       reject { subject["tags"] || [] }.include? "_grokparsefailure"
+      insist { subject["type"] } == "syslog"
+      insist { subject["message"] } == line
+      insist { subject["syslog_facility"] } == "kernel"
       insist { subject["apparmor_evt"] } == "STATUS"
       insist { subject["apparmor_rest"] } == %q{operation="profile_replace" name="/usr/lib/connman/scripts/dhclient-script" pid=777 comm="apparmor_parser"}
+      insist { subject["evt_type"] } == "1400"
+      insist { subject["syslog_apparmor_type"] } == "1400"
+      insist { subject["syslog_apparmor_name"] } == "/usr/lib/connman/scripts/dhclient-script"
+      insist { subject["syslog_apparmor_pid"] } == "777"
+      insist { subject["syslog_apparmor_comm"] } == "apparmor_parser"
+      insist { subject["syslog_apparmor_operation"] } == "profile_replace"
     end
   end
 
@@ -75,8 +84,19 @@ describe "200_filter_all", :our_filters => true do
     line = %q{<5>Aug 29 13:41:59 ip-172-31-18-91 kernel: [   15.199355] type=1400 audit(1409319719.698:10): apparmor="ALLOWED" operation="truncate" parent=15066 profile="/usr/bin/python2.7" name="/tmp/lala123" pid=15167 comm="python" requested_mask="w" denied_mask="w" fsuid=1000 ouid=1000}
     sample "message" => line, "type" => 'syslog' do
       reject { subject["tags"] || [] }.include? "_grokparsefailure"
+      insist { subject["type"] } == "syslog"
+      insist { subject["message"] } == line
+      insist { subject["syslog_facility"] } == "kernel"
       insist { subject["apparmor_evt"] } == "ALLOWED"
       insist { subject["apparmor_rest"] } == %q{operation="truncate" parent=15066 profile="/usr/bin/python2.7" name="/tmp/lala123" pid=15167 comm="python" requested_mask="w" denied_mask="w" fsuid=1000 ouid=1000}
+      insist { subject["evt_type"] } == "1400"
+      insist { subject["syslog_apparmor_type"] } == "1400"
+      insist { subject["syslog_apparmor_name"] } == "/tmp/lala123"
+      insist { subject["syslog_apparmor_profile"] } == "/usr/bin/python2.7"
+      insist { subject["syslog_apparmor_pid"] } == "15167"
+      insist { subject["syslog_apparmor_parent"] } == "15066"
+      insist { subject["syslog_apparmor_comm"] } == "python"
+      insist { subject["syslog_apparmor_operation"] } == "truncate"
     end
   end
 
@@ -84,8 +104,19 @@ describe "200_filter_all", :our_filters => true do
     line = %q{<5>Aug 29 13:41:59 ip-172-31-18-91 kernel: [   15.199355] type=1400 audit(1409319719.698:10): apparmor="DENIED" operation="mknod" parent=15066 profile="/usr/bin/python2.7" name="/tmp/alal1234" pid=15300 comm="python" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000}
     sample "message" => line, "type" => 'syslog' do
       reject { subject["tags"] || [] }.include? "_grokparsefailure"
+      insist { subject["type"] } == "syslog"
+      insist { subject["message"] } == line
+      insist { subject["syslog_facility"] } == "kernel"
       insist { subject["apparmor_evt"] } == "DENIED"
       insist { subject["apparmor_rest"] } == %q{operation="mknod" parent=15066 profile="/usr/bin/python2.7" name="/tmp/alal1234" pid=15300 comm="python" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000}
+      insist { subject["evt_type"] } == "1400"
+      insist { subject["syslog_apparmor_type"] } == "1400"
+      insist { subject["syslog_apparmor_name"] } == "/tmp/alal1234"
+      insist { subject["syslog_apparmor_profile"] } == "/usr/bin/python2.7"
+      insist { subject["syslog_apparmor_pid"] } == "15300"
+      insist { subject["syslog_apparmor_parent"] } == "15066"
+      insist { subject["syslog_apparmor_comm"] } == "python"
+      insist { subject["syslog_apparmor_operation"] } == "mknod"
     end
   end
 
