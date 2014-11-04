@@ -9,7 +9,7 @@ BEGIN {
 
 require "test_utils"
 
-describe "200_filter_all", :our_filters => true do
+describe "240_filter_syslog_all", :our_filters => true do
   extend LogStash::RSpec
 
   # Stub the time out. Since Syslog doesn't include year in it's dates by
@@ -18,7 +18,7 @@ describe "200_filter_all", :our_filters => true do
     expect(Time).to receive(:now).and_return( Time.local(2014,7,13,19,40,23) )
   end
 
-  config [ "/etc/logstash/conf.d/200_filter_all.conf" ].map { |fn| File.open(fn).read }.reduce(:+)
+  config [ "/etc/logstash/conf.d/240_filter_syslog_all.conf" ].map { |fn| File.open(fn).read }.reduce(:+)
 
   describe "type => syslog, kernel IPTables-Dropped message" do
 

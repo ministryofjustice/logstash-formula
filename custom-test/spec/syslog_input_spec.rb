@@ -60,7 +60,7 @@ describe "syslog messages", :socket => true do
   extend LogStash::RSpec
   extend TestHelpers
 
-  config [ '/etc/logstash/conf.d/200_filter_all.conf' ].map { |fn| File.open(fn).read }.reduce(:+)
+  config [ '/etc/logstash/conf.d/240_filter_syslog_all.conf' ].map { |fn| File.open(fn).read }.reduce(:+)
 
   test_logstash do
 
