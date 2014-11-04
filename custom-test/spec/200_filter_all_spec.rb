@@ -27,8 +27,9 @@ describe "200_filter_all", :our_filters => true do
     sample "message" => line, "type" => 'syslog' do
 
       reject { subject["tags"] || [] }.include? "_grokparsefailure"
-      reject { subject }.include? 'syslog_message'
+      reject { subject }.include? "@message"
       insist { subject["message"] } == line
+      insist { subject["syslog_message"] } == %q{[314236.389814] IPTables-Dropped: IN=eth0 OUT= MAC=00:50:56:01:0a:0b:00:50:56:8e:54:fd:08:00 SRC=10.5.12.100 DST=10.5.11.100 LEN=60 TOS=0x00 PREC=0x00 TTL=63 ID=8247 DF PROTO=TCP SPT=54612 DPT=4506 WINDOW=29200 RES=0x00 SYN URGP=0}
       insist { subject["host"] } == "master.prod1"
       insist { subject["type"] } == "syslog"
       insist { subject["syslog_facility"] } == "kernel"
@@ -53,11 +54,13 @@ describe "200_filter_all", :our_filters => true do
     line = %q{<86>Jul 8 12:30:01 ac-front.prod1 CRON[20083]: pam_unix(cron:session): session opened for user accelerated_claims by (uid=0)}
     sample "message" => line, "type" => 'syslog' do
       reject { subject["tags"] || [] }.include? "_grokparsefailure"
-      insist { subject["host"] } == "ac-front.prod1"
+      reject { subject }.include? "@message"
       insist { subject["type"] } == "syslog"
+      insist { subject["message"] } == line
+      insist { subject["host"] } == "ac-front.prod1"
       insist { subject["syslog_facility"] } == "security/authorization"
       insist { subject["syslog_program"] } == "CRON"
-      insist { subject["@message"] } == %q{pam_unix(cron:session): session opened for user accelerated_claims by (uid=0)}
+      insist { subject["syslog_message"] } == %q{pam_unix(cron:session): session opened for user accelerated_claims by (uid=0)}
       insist { subject.timestamp.iso8601 } == "2014-07-08T19:30:01Z"
     end
   end

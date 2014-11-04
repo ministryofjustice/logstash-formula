@@ -75,8 +75,7 @@ describe "syslog messages", :socket => true do
     test_syslog_message(line) do |event|
 
       reject { event["tags"] || [] }.include? "_grokparsefailure"
-      reject { event }.include? "sayslog_message"
-      insist { event["@message"] } ==  "[314236.389814] IPTables-Dropped: IN=eth0 OUT= MAC=00:50:56:01:0a:0b:00:50:56:8e:54:fd:08:00 SRC=10.5.12.100 DST=10.5.11.100 LEN=60 TOS=0x00 PREC=0x00 TTL=63 ID=8247 DF PROTO=TCP SPT=54612 DPT=4506 WINDOW=29200 RES=0x00 SYN URGP=0"
+      insist { event["syslog_message"] } ==  "[314236.389814] IPTables-Dropped: IN=eth0 OUT= MAC=00:50:56:01:0a:0b:00:50:56:8e:54:fd:08:00 SRC=10.5.12.100 DST=10.5.11.100 LEN=60 TOS=0x00 PREC=0x00 TTL=63 ID=8247 DF PROTO=TCP SPT=54612 DPT=4506 WINDOW=29200 RES=0x00 SYN URGP=0"
       insist { event["host"] } == "master.prod1"
       insist { event["type"] } == "syslog"
       insist { event["syslog_facility"] } == "kernel"
