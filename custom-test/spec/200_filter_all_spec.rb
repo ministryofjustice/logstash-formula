@@ -47,7 +47,47 @@ describe "200_filter_all", :our_filters => true do
       insist { subject["received_at"].iso8601 } == "2014-07-14T02:40:23Z"
 
     end
-
   end
+
+  describe "type => syslog, CRON pam_unix session opened message" do
+    line = %q{<86>Jul 8 12:30:01 ac-front.prod1 CRON[20083]: pam_unix(cron:session): session opened for user accelerated_claims by (uid=0)}
+    sample "message" => line, "type" => 'syslog' do
+      reject { subject["tags"] || [] }.include? "_grokparsefailure"
+      insist { subject["host"] } == "ac-front.prod1"
+      insist { subject["type"] } == "syslog"
+      insist { subject["syslog_facility"] } == "security/authorization"
+      insist { subject["syslog_program"] } == "CRON"
+      insist { subject["@message"] } == %q{pam_unix(cron:session): session opened for user accelerated_claims by (uid=0)}
+      insist { subject.timestamp.iso8601 } == "2014-07-08T19:30:01Z"
+    end
+  end
+
+  describe "type => syslog, kernel audit/apparmor STATUS" do
+    line = %q{<5>Aug 29 13:41:59 ip-172-31-18-91 kernel: [   15.199355] type=1400 audit(1409319719.698:10): apparmor="STATUS" operation="profile_replace" name="/usr/lib/connman/scripts/dhclient-script" pid=777 comm="apparmor_parser"}
+    sample "message" => line, "type" => 'syslog' do
+      reject { subject["tags"] || [] }.include? "_grokparsefailure"
+      insist { subject["apparmor_evt"] } == "STATUS"
+      insist { subject["apparmor_rest"] } == %q{operation="profile_replace" name="/usr/lib/connman/scripts/dhclient-script" pid=777 comm="apparmor_parser"}
+    end
+  end
+
+  describe "type => syslog, kernel audit/apparmor ALLOWED" do
+    line = %q{<5>Aug 29 13:41:59 ip-172-31-18-91 kernel: [   15.199355] type=1400 audit(1409319719.698:10): apparmor="ALLOWED" operation="truncate" parent=15066 profile="/usr/bin/python2.7" name="/tmp/lala123" pid=15167 comm="python" requested_mask="w" denied_mask="w" fsuid=1000 ouid=1000}
+    sample "message" => line, "type" => 'syslog' do
+      reject { subject["tags"] || [] }.include? "_grokparsefailure"
+      insist { subject["apparmor_evt"] } == "ALLOWED"
+      insist { subject["apparmor_rest"] } == %q{operation="truncate" parent=15066 profile="/usr/bin/python2.7" name="/tmp/lala123" pid=15167 comm="python" requested_mask="w" denied_mask="w" fsuid=1000 ouid=1000}
+    end
+  end
+
+  describe "type => syslog, kernel audit/apparmor DENIED" do
+    line = %q{<5>Aug 29 13:41:59 ip-172-31-18-91 kernel: [   15.199355] type=1400 audit(1409319719.698:10): apparmor="DENIED" operation="mknod" parent=15066 profile="/usr/bin/python2.7" name="/tmp/alal1234" pid=15300 comm="python" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000}
+    sample "message" => line, "type" => 'syslog' do
+      reject { subject["tags"] || [] }.include? "_grokparsefailure"
+      insist { subject["apparmor_evt"] } == "DENIED"
+      insist { subject["apparmor_rest"] } == %q{operation="mknod" parent=15066 profile="/usr/bin/python2.7" name="/tmp/alal1234" pid=15300 comm="python" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000}
+    end
+  end
+
 
 end
