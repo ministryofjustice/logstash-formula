@@ -11,4 +11,4 @@ dir="$(dirname $0)"
 
 cd $dir
 
-/opt/logstash/bin/logstash rspec -fd --tag socket *_spec.rb
+/opt/logstash/bin/logstash rspec -fd --tag our_filters --tag socket spec/*_spec.rb
