@@ -160,4 +160,6 @@ To run the test suite under Vagrant:
 
   vagrant up
   vagrant ssh
-  sudo /vagrant/custom-test/run.sh
+  # if updates have been made:
+  #  salt-call state.highstate
+  /vagrant/custom-test/run.sh
