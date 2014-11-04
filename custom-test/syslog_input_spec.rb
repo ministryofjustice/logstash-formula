@@ -60,8 +60,7 @@ describe "syslog messages", :socket => true do
   extend LogStash::RSpec
   extend TestHelpers
 
-  # TODO: Make sure the config files match what we pass to upstart?
-  config [ '/etc/logstash/indexer.conf' ].map { |fn| File.open(fn).read }.reduce(:+)
+  config [ '/etc/logstash/conf.d/200_filter_all.conf' ].map { |fn| File.open(fn).read }.reduce(:+)
 
   test_logstash do
 
@@ -94,7 +93,7 @@ describe "syslog messages", :socket => true do
       # Check that the received_at was converted to a proper timestamp, not a string
       insist { event["received_at"] }.is_a? Time
       insist { event["received_at"].iso8601 } == "2014-07-14T02:40:23Z"
-  end
+    end
 
 =begin haproxy example
     line = %q{<134>Jul 9 11:08:50 localhost haproxy[4494]: 81.134.202.29:41294 [09/Jul/2014:11:08:49.463] https~ apps.pvb/apps.pvb1 966/0/0/0/966 200 1599 - - ---- 8/8/0/1/0 0/0 {|Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:30.0) Gecko/20100101 Firefox/30.0} "GET /app/panels/table/micropanel.html HTTP/1.1" {request_id=5186CA1D:A14E_AC1F2FAE:01BB_53BD22C1_1116:118E,- ssl_version=TLSv1.2 ssl_cypher=ECDHE-RSA-AES128-GCM-SHA256}}
