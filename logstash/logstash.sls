@@ -1,5 +1,4 @@
 {% from "logstash/map.jinja" import logstash with context %}
-{% from 'utils/apps/lib.sls' import app_skeleton with context %}
 
 include:
   - .deps
@@ -7,7 +6,23 @@ include:
   - redis
   - firewall
 
-{{ app_skeleton('logstash') }}
+stop_old_logstash:
+  service.dead:
+    - name: logstash-indexer
+
+remove_old_logstash_upstart_conf:
+  file.absent:
+    - name: /etc/init/logstash-indexer.conf
+    - prereq:
+      - service: stop_old_logstash
+
+remove_old_logstash_jar:
+  file.absent:
+    - name: /usr/src/packages/logstash-1.2.2-flatjar.jar
+
+remove_old_logstash_indexer_conf:
+  file.absent:
+    - name: /etc/logstash/indexer.conf
 
 logstash_repo:
   pkgrepo.managed:
@@ -16,7 +31,8 @@ logstash_repo:
     - file: /etc/apt/sources.list.d/logstash.list
     - keyid: D88E42B4
     - keyserver: keyserver.ubuntu.com
-
+    - requires:
+      - service: stop_old_logstash
 
 logstash_indexer:
   pkg.installed:
@@ -36,15 +52,24 @@ logstash_indexer:
 /etc/logstash/patterns:
   file:
     - recurse
+    - clean: True
     - source: salt://logstash/templates/logstash/patterns
     - template: jinja
     - file_mode: 644
-    - dir_mode: 755
-    - user: logstash
+    - dir_mode: 2755
+    - user: root
     - group: logstash
     - require:
       - pkg: logstash_indexer
 
+/etc/logstash/conf.d:
+  file.directory:
+    - clean: True
+    - dir_mode: 2755
+    - user: root
+    - group: logstash
+    - require:
+      - pkg: logstash_indexer
 
 {% for conf_file in logstash.config_files %}
 
@@ -54,11 +79,12 @@ logstash_indexer:
     - source: salt://logstash/templates/logstash/conf.d/{{ conf_file }}
     - template: jinja
     - mode: 644
-    - user: logstash
+    - user: root
     - group: logstash
     - mode: 644
     - require:
       - pkg: logstash_indexer
+      - file: /etc/logstash/conf.d
     - watch_in:
       - service: logstash_indexer
 
