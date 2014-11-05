@@ -1,4 +1,10 @@
-## Version 1.4.0¬
+## Version 1.5.0
+
+* Add input unix socket handler for log replay
+* Add optional archive logging
+* Add statsd logging of key events
+
+## Version 1.4.0
 
 * Upgrade to Logstash 1.4.2, via official packages
 * Move to conf.d configuration style
