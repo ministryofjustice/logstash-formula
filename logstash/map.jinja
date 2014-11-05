@@ -18,11 +18,6 @@
     'Debian': {
         'redis': 'monitoring.local',
         'redis_key': 'logstash.beaver',
-        'source': {
-            'file': 'logstash-1.2.2-flatjar.jar',
-            'path': 'http://static.dsd.io/packages',
-            'hash': 'md5=f2ec9e54e13428ed6d5c96b218126a0e',
-        },
         'enable_archive_logs': False,
         'config_files': [
             '100_input_syslog.conf',
@@ -33,9 +28,9 @@
             '250_filter_nginx_all.conf',
             '260_filter_audit_all.conf',
             '270_filter_haproxy_all.conf',
-            '900_output_elasticsearch.conf'
-            '910_output_archive.conf'
-            '920_output_statsd_all.conf'
+            '900_output_elasticsearch.conf',
+            '910_output_archive.conf',
+            '920_output_statsd_all.conf',
             '921_output_statsd_http_status.conf'
         ],
         'elasticsearch': {
