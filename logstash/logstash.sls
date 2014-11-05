@@ -47,7 +47,23 @@ logstash_indexer:
     - watch:
       - file: /etc/logstash/patterns
 
+/var/log/logstash:
+  file.directory:
+    - template: jinja
+    - dir_mode: 2750
+    - user: logstash
+    - group: adm
+    - require:
+      - pkg: logstash_indexer
 
+/var/log/logstash/archive:
+  file.directory:
+    - template: jinja
+    - dir_mode: 2750
+    - user: logstash
+    - group: adm
+    - require:
+      - file: /var/log/logstash/archive
 
 /etc/logstash/patterns:
   file:
