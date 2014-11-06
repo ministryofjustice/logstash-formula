@@ -17,7 +17,7 @@
 {% set logstash = salt['grains.filter_by']({
     'Debian': {
         'redis': 'monitoring.local',
-        'redis_key': 'logstash.beaver',
+        'redis_key': 'logstash:beaver',
         'config_files': [
             '100_input_syslog.conf',
             '101_input_redis.conf',
