@@ -47,7 +47,10 @@ logstash_indexer:
     - watch:
       - file: /etc/logstash/patterns
 
-
+/etc/init/logstash-web.conf:
+  file.absent:
+    - require:
+      - pkg: logstash_indexer
 
 /etc/logstash/patterns:
   file:
