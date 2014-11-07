@@ -65,6 +65,11 @@ logstash_indexer:
     - require:
       - file: /var/log/logstash
 
+/etc/init/logstash-web.conf:
+  file.absent:
+    - require:
+      - pkg: logstash_indexer
+
 /etc/logstash/patterns:
   file:
     - recurse
