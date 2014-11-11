@@ -1,7 +1,8 @@
 {% set kibana = salt['grains.filter_by']({
     'Debian': {
         'revision': 'v3.0.0milestone5',
-        'elasticsearch': '//"+window.location.hostname.replace(/^kibana/,"elasticsearch")+(window.location.port ? ":" + window.location.port : "")+"'
+        'elasticsearch': '//"+window.location.hostname.replace(/^kibana/,"elasticsearch")+(window.location.port ? ":" + window.location.port : "")+"',
+        'es_index': '"kibana-int"',
     },
     'default': 'Debian',
 }, merge=salt['pillar.get']('kibana', {})) %}
