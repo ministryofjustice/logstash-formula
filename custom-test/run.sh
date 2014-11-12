@@ -1,11 +1,18 @@
 #!/bin/sh
 
-sudo stop logstash-indexer
+# To enable debugging of the logstash internals during the tests:
+# export TEST_DEBUG=true
 
-JAR_LOCATION=${JAR_LOCATION:-"/usr/src/packages/logstash-1.2.2-flatjar.jar"}
+sudo stop logstash
 
 set -e
 
 dir="$(dirname $0)"
 
-java -jar $JAR_LOCATION rspec -fd "$dir"/*_spec.rb
+cd $dir
+
+if [ -z $@ ]; then
+  /opt/logstash/bin/logstash rspec -fd --tag our_filters --tag socket spec/*_spec.rb
+else
+  /opt/logstash/bin/logstash rspec -fd --tag our_filters --tag socket $@
+fi
