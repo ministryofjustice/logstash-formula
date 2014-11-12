@@ -56,14 +56,20 @@ logstash_indexer:
     - require:
       - pkg: logstash_indexer
 
-/var/log/logstash/archive:
+/data/logstash:
   file.directory:
-    - template: jinja
     - dir_mode: 2750
     - user: logstash
     - group: adm
     - require:
-      - file: /var/log/logstash
+      - pkg: logstash_indexer
+
+logstash_archive_log_dir:
+  file.directory:
+    - name: {{ logstash.archive_log_dir }}
+    - dir_mode: 2750
+    - user: logstash
+    - group: adm
 
 /etc/init/logstash-web.conf:
   file.absent:

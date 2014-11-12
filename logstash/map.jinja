@@ -19,6 +19,7 @@
         'redis': 'monitoring.local',
         'redis_key': 'logstash:beaver',
         'enable_archive_logs': False,
+        'archive_log_dir': '/var/log/logstash/archive',
         'config_files': [
             '100_input_syslog.conf',
             '101_input_redis.conf',
