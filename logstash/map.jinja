@@ -19,15 +19,21 @@
     'Debian': {
         'redis': 'monitoring.local',
         'redis_key': 'logstash:beaver',
+        'enable_archive_logs': False,
+        'archive_log_dir': '/var/log/logstash/archive',
         'config_files': [
             '100_input_syslog.conf',
             '101_input_redis.conf',
+            '102_input_unix_socket.conf',
             '200_filter_all.conf',
             '240_filter_syslog_all.conf',
             '250_filter_nginx_all.conf',
             '260_filter_audit_all.conf',
             '270_filter_haproxy_all.conf',
-            '900_output_elasticsearch.conf'
+            '900_output_elasticsearch.conf',
+            '910_output_archive.conf',
+            '920_output_statsd_all.conf',
+            '921_output_statsd_http_status.conf'
         ],
         'elasticsearch': {
             'host': 'monitoring.local',
