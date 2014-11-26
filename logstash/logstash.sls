@@ -89,31 +89,29 @@ logstash_archive_log_dir:
     - require:
       - pkg: logstash_indexer
 
-/etc/logstash/conf.d:
+clean_logstash_confd_dir:
   file.directory:
+    - name: /etc/logstash/conf.d
     - clean: True
     - dir_mode: 2755
     - user: root
     - group: logstash
-    - require:
-      - pkg: logstash_indexer
 
 {% for conf_file in logstash.config_files %}
 
 /etc/logstash/conf.d/{{ conf_file }}:
-  file:
-    - managed
+  file.managed:
     - source: salt://logstash/templates/logstash/conf.d/{{ conf_file }}
     - template: jinja
+    - makedir: True
     - mode: 644
     - user: root
     - group: logstash
     - mode: 644
     - require:
       - pkg: logstash_indexer
-      - file: /etc/logstash/conf.d
-    - watch_in:
-      - service: logstash_indexer
+    - require_in:
+      - file: clean_logstash_confd_dir
 
 {% endfor %}
 
