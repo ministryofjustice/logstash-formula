@@ -1,3 +1,7 @@
+## CURRENT
+
+* Fix conf.d management so reload only happens when it changes
+
 ## Version 1.5.0
 
 * Add input unix socket handler for log replay
