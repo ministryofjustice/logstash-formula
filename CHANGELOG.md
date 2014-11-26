@@ -1,4 +1,4 @@
-## CURRENT
+## Version 1.5.1
 
 * Fix conf.d management so reload only happens when it changes
 
