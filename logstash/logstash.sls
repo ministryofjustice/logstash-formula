@@ -112,6 +112,8 @@ clean_logstash_confd_dir:
       - pkg: logstash_indexer
     - require_in:
       - file: clean_logstash_confd_dir
+    - watch_in:
+      - service: logstash_indexer
 
 {% endfor %}
 
