@@ -20,8 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node.vm.synced_folder "vagrant/salt/pillar", "/srv/pillar"
     node.vm.synced_folder "vagrant/salt/root", "/srv/salt"
 
-    node.vm.box = "precise64"
-    node.vm.box_url = "http://files.vagrantup.com/precise64.box"
+    node.vm.box = "mikepea/precise64_bigpkg_salt"
     node.vm.hostname = "logstash"
 
     node.vm.provider "virtualbox" do |v|
