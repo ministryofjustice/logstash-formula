@@ -1,6 +1,12 @@
+## Version 1.5.3
+
+* Allow specification of statsd output port/host
+* Fix restart bug
+
 ## Version 1.5.2
 
 * Bump versions of dependencies: utils-formula; apparmor-formula
+
 ## Version 1.5.1
 
 * Fix conf.d management so reload only happens when it changes
