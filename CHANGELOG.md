@@ -1,3 +1,7 @@
+## Version 1.6.x
+
+* Handle mongodb.log: mark-up and send to statsd
+
 ## Version 1.5.3
 
 * Allow specification of statsd output port/host
