@@ -84,5 +84,49 @@ describe "280_filter_mongodb_log", :our_filters => true do
 
   end
 
+  describe "type => mongodb_log, conn slow query message -- 2" do
+
+    line = %q{2015-01-05T14:28:39.595+0000 [conn108385] command opglpa-auth.$cmd command: update { update: "token", updates: [ { q: { _id: "e27c2727fdd1ebbc100c1cc0c1abb9b1", scopes: "" }, u: { $set: { expires: 1420472619 } }, multi: false, upsert: false } ], writeConcern: { fsync: false, j: false, wtimeout: 10, w: 1 } } keyUpdates:0 numYields:0  reslen:95 123ms}
+
+    sample "message" => line, "type" => 'mongodb_log', 'tags' => ['mongodb', 'log'] do
+      reject { subject["tags"] || [] }.include? "_grokparsefailure"
+      insist { subject["message"] } == line
+      insist { subject["mongodb_log_type_message"] } == 'command opglpa-auth.$cmd command: update { update: "token", updates: [ { q: { _id: "e27c2727fdd1ebbc100c1cc0c1abb9b1", scopes: "" }, u: { $set: { expires: 1420472619 } }, multi: false, upsert: false } ], writeConcern: { fsync: false, j: false, wtimeout: 10, w: 1 } } keyUpdates:0 numYields:0  reslen:95 123ms'
+      insist { subject["mongodb_log_timestamp"] } == '2015-01-05T14:28:39.595+0000'
+      #insist { subject.timestamp.utc.iso8601 } == "2015-01-05T14:28:39Z"
+      insist { subject["mongodb_log_subtype"] } == "conn"
+      insist { subject["mongodb_log_conn_number"] } == 108385
+      insist { subject["tags"] || [] }.include? "mongodb_slow_query"
+      insist { subject["mongodb_log_query_operation"] } == 'command'
+      insist { subject["mongodb_log_query_database"] } == 'opglpa-auth'
+      insist { subject["mongodb_log_query_collection"] } == '$cmd'
+      insist { subject["mongodb_log_query_duration_ms"] } == 123
+      insist { subject["mongodb_log_query_message"] } == 'command: update { update: "token", updates: [ { q: { _id: "e27c2727fdd1ebbc100c1cc0c1abb9b1", scopes: "" }, u: { $set: { expires: 1420472619 } }, multi: false, upsert: false } ], writeConcern: { fsync: false, j: false, wtimeout: 10, w: 1 } } keyUpdates:0 numYields:0  reslen:95'
+    end
+
+  end
+
+  describe "type => mongodb_log, conn slow query message -- 3" do
+
+    line = %q{2015-01-05T15:11:21.824+0000 [conn108425] command opglpa-api.$cmd command: count { count: "lpaInfo", query: { damage_award: true } } planSummary: COLLSCAN keyUpdates:0 numYields:1 locks(micros) r:183877 reslen:48 109ms}
+
+    sample "message" => line, "type" => 'mongodb_log', 'tags' => ['mongodb', 'log'] do
+      reject { subject["tags"] || [] }.include? "_grokparsefailure"
+      insist { subject["message"] } == line
+      insist { subject["mongodb_log_type_message"] } == 'command opglpa-api.$cmd command: count { count: "lpaInfo", query: { damage_award: true } } planSummary: COLLSCAN keyUpdates:0 numYields:1 locks(micros) r:183877 reslen:48 109ms'
+      insist { subject["mongodb_log_timestamp"] } == '2015-01-05T15:11:21.824+0000'
+      #insist { subject.timestamp.utc.iso8601 } == "2015-01-05T15:11:21Z"
+      insist { subject["mongodb_log_subtype"] } == "conn"
+      insist { subject["mongodb_log_conn_number"] } == 108425
+      insist { subject["tags"] || [] }.include? "mongodb_slow_query"
+      insist { subject["mongodb_log_query_operation"] } == 'command'
+      insist { subject["mongodb_log_query_database"] } == 'opglpa-api'
+      insist { subject["mongodb_log_query_collection"] } == '$cmd'
+      insist { subject["mongodb_log_query_duration_ms"] } == 109
+      insist { subject["mongodb_log_query_message"] } == 'command: count { count: "lpaInfo", query: { damage_award: true } } planSummary: COLLSCAN keyUpdates:0 numYields:1 locks(micros) r:183877 reslen:48'
+    end
+
+  end
+
 
 end
