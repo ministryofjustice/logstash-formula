@@ -1,4 +1,4 @@
-## Version 1.6.x
+## Version 1.6.0
 
 * Log _grokparsefailure messages to a file for reprocessing (enabled by default)
 
