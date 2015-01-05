@@ -37,6 +37,7 @@ describe "280_filter_mongodb_log", :our_filters => true do
       insist { subject["message"] } == line
       insist { subject["mongodb_log_message"] } == '[initandlisten] MongoDB starting : pid=25753 port=27017 dbpath=/data/mongodb 64-bit host=mongo-05.lpa-enh'
       insist { subject["mongodb_log_type_message"] } == 'MongoDB starting : pid=25753 port=27017 dbpath=/data/mongodb 64-bit host=mongo-05.lpa-enh'
+      insist { subject["mongodb_log_timestamp"] } == '2014-11-10T12:46:21.719+0000'
       insist { subject.timestamp.utc.iso8601 } == "2014-11-10T12:46:21Z"
       insist { subject["mongodb_log_subtype"] } == "initandlisten"
     end
@@ -52,6 +53,7 @@ describe "280_filter_mongodb_log", :our_filters => true do
       insist { subject["message"] } == line
       insist { subject["mongodb_log_message"] } == '[conn76798]  authenticate db: local { authenticate: 1, nonce: "xxx", user: "__system", key: "xxx" }'
       insist { subject["mongodb_log_type_message"] } == 'authenticate db: local { authenticate: 1, nonce: "xxx", user: "__system", key: "xxx" }'
+      insist { subject["mongodb_log_timestamp"] } == '2014-12-11T07:49:51.897+0000'
       insist { subject.timestamp.utc.iso8601 } == "2014-12-11T07:49:51Z"
       insist { subject["mongodb_log_subtype"] } == "conn"
       insist { subject["mongodb_log_conn_number"] } == 76798
@@ -62,13 +64,14 @@ describe "280_filter_mongodb_log", :our_filters => true do
 
   describe "type => mongodb_log, conn slow query message" do
 
-    line = %q{2014-11-13T02:02:00.028+0000 [conn4671] getmore opglpa-api.application cursorid:116561480221 ntoreturn:0 exhaust:1 keyUpdates:0 numYields:8 locks(micros) r:174806 nreturned:1418 reslen:4194430 141ms}
+    line = %q{2015-11-13T02:02:00.028+0000 [conn4671] getmore opglpa-api.application cursorid:116561480221 ntoreturn:0 exhaust:1 keyUpdates:0 numYields:8 locks(micros) r:174806 nreturned:1418 reslen:4194430 141ms}
 
     sample "message" => line, "type" => 'mongodb_log', 'tags' => ['mongodb', 'log'] do
       reject { subject["tags"] || [] }.include? "_grokparsefailure"
       insist { subject["message"] } == line
       insist { subject["mongodb_log_type_message"] } == 'getmore opglpa-api.application cursorid:116561480221 ntoreturn:0 exhaust:1 keyUpdates:0 numYields:8 locks(micros) r:174806 nreturned:1418 reslen:4194430 141ms'
-      insist { subject.timestamp.utc.iso8601 } == "2014-11-13T02:02:00Z"
+      insist { subject["mongodb_log_timestamp"] } == '2015-11-13T02:02:00.028+0000'
+      insist { subject.timestamp.utc.iso8601 } == "2015-11-13T02:02:00Z"
       insist { subject["mongodb_log_subtype"] } == "conn"
       insist { subject["mongodb_log_conn_number"] } == 4671
       insist { subject["tags"] || [] }.include? "mongodb_slow_query"
