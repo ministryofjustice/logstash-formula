@@ -1,4 +1,4 @@
-## Version 1.7.x
+## Version 1.7.0
 
 * Handle mongodb.log: mark-up and send to statsd
 
