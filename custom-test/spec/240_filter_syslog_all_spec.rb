@@ -14,8 +14,20 @@ describe "240_filter_syslog_all", :our_filters => true do
 
   # Stub the time out. Since Syslog doesn't include year in it's dates by
   # default lets make sure we pass past 2014
+  # #
+  # To work out what the correct value for a date field in this test should be use:
+  #
+  #     TZ=UTC date --date='TZ="America/Los_Angeles" Aug 29 13:41:59 2014'
   before(:each) do
-    expect(Time).to receive(:now).and_return( Time.local(2014,7,13,19,40,23) )
+    mock_time = Time.local(2014,7,13,19,40,23)
+    Time.stub(:new) do |arg|
+      if arg
+        Time.new(*arg)
+      else
+        mock_time
+      end
+    end
+    Time.stub(:now).and_return(mock_time)
   end
 
   config [ "/etc/logstash/conf.d/240_filter_syslog_all.conf" ].map { |fn| File.open(fn).read }.reduce(:+)
@@ -45,8 +57,8 @@ describe "240_filter_syslog_all", :our_filters => true do
 
       # Check that the received_at was converted to a proper timestamp, not a string
       insist { subject["received_at"] }.is_a? Time
-      insist { subject["received_at"].iso8601 } == "2014-07-14T02:40:23Z"
-      insist { subject.timestamp.iso8601 } == "2014-07-14T02:40.23Z"
+      insist { subject["received_at"].utc.iso8601 } == "2014-07-14T02:40:23Z"
+      insist { subject.timestamp.utc.iso8601 } == "2014-07-08T13:51:09Z"
 
     end
   end
@@ -62,7 +74,7 @@ describe "240_filter_syslog_all", :our_filters => true do
       insist { subject["syslog_facility"] } == "security/authorization"
       insist { subject["syslog_program"] } == "CRON"
       insist { subject["syslog_message"] } == %q{pam_unix(cron:session): session opened for user accelerated_claims by (uid=0)}
-      insist { subject.timestamp.iso8601 } == "2014-07-08T19:30:01Z"
+      insist { subject.timestamp.utc.iso8601 } == "2014-07-08T19:30:01Z"
     end
   end
 
@@ -81,7 +93,7 @@ describe "240_filter_syslog_all", :our_filters => true do
       insist { subject["syslog_apparmor_pid"] } == "777"
       insist { subject["syslog_apparmor_comm"] } == "apparmor_parser"
       insist { subject["syslog_apparmor_operation"] } == "profile_replace"
-      insist { subject.timestamp.iso8601 } == "2014-08-29T21:41:59Z"
+      insist { subject.timestamp.iso8601 } == "2014-08-29T20:41:59Z"
     end
   end
 
@@ -102,7 +114,7 @@ describe "240_filter_syslog_all", :our_filters => true do
       insist { subject["syslog_apparmor_parent"] } == "15066"
       insist { subject["syslog_apparmor_comm"] } == "python"
       insist { subject["syslog_apparmor_operation"] } == "truncate"
-      insist { subject.timestamp.iso8601 } == "2014-08-29T21:41:59Z"
+      insist { subject.timestamp.iso8601 } == "2014-08-29T20:41:59Z"
     end
   end
 
@@ -123,7 +135,7 @@ describe "240_filter_syslog_all", :our_filters => true do
       insist { subject["syslog_apparmor_parent"] } == "15066"
       insist { subject["syslog_apparmor_comm"] } == "python"
       insist { subject["syslog_apparmor_operation"] } == "mknod"
-      insist { subject.timestamp.iso8601 } == "2014-08-29T21:41:59Z"
+      insist { subject.timestamp.iso8601 } == "2014-08-29T20:41:59Z"
     end
   end
 
