@@ -12,10 +12,16 @@ require "test_utils"
 describe "280_filter_mongodb_log", :our_filters => true do
   extend LogStash::RSpec
 
-  # Stub the time out. Since Syslog doesn't include year in it's dates by
-  # default lets make sure we pass past 2014
   before(:each) do
-    expect(Time).to receive(:now).and_return( Time.local(2014,7,13,19,40,23) )
+    mock_time = Time.local(2014,7,13,19,40,23)
+    Time.stub(:new) do |arg|
+      if arg
+        Time.new(*arg)
+      else
+        mock_time
+      end
+    end
+    Time.stub(:now).and_return(mock_time)
   end
 
   config [ "/etc/logstash/conf.d/280_filter_mongodb_log.conf" ].map { |fn| File.open(fn).read }.reduce(:+)
