@@ -31,11 +31,13 @@
             '250_filter_nginx_all.conf',
             '260_filter_audit_all.conf',
             '270_filter_haproxy_all.conf',
+            '280_filter_mongodb_log.conf',
             '900_output_elasticsearch.conf',
             '910_output_archive.conf',
             '915_output_grokparsefailure.conf',
             '920_output_statsd_all.conf',
-            '921_output_statsd_http_status.conf'
+            '921_output_statsd_http_status.conf',
+            '922_output_statsd_mongodb.conf'
         ],
         'statsd_output': {
             'port': '8125',

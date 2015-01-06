@@ -46,6 +46,7 @@ describe "240_filter_syslog_all", :our_filters => true do
       # Check that the received_at was converted to a proper timestamp, not a string
       insist { subject["received_at"] }.is_a? Time
       insist { subject["received_at"].iso8601 } == "2014-07-14T02:40:23Z"
+      insist { subject.timestamp.iso8601 } == "2014-07-14T02:40.23Z"
 
     end
   end
@@ -80,6 +81,7 @@ describe "240_filter_syslog_all", :our_filters => true do
       insist { subject["syslog_apparmor_pid"] } == "777"
       insist { subject["syslog_apparmor_comm"] } == "apparmor_parser"
       insist { subject["syslog_apparmor_operation"] } == "profile_replace"
+      insist { subject.timestamp.iso8601 } == "2014-08-29T21:41:59Z"
     end
   end
 
@@ -100,6 +102,7 @@ describe "240_filter_syslog_all", :our_filters => true do
       insist { subject["syslog_apparmor_parent"] } == "15066"
       insist { subject["syslog_apparmor_comm"] } == "python"
       insist { subject["syslog_apparmor_operation"] } == "truncate"
+      insist { subject.timestamp.iso8601 } == "2014-08-29T21:41:59Z"
     end
   end
 
@@ -120,6 +123,7 @@ describe "240_filter_syslog_all", :our_filters => true do
       insist { subject["syslog_apparmor_parent"] } == "15066"
       insist { subject["syslog_apparmor_comm"] } == "python"
       insist { subject["syslog_apparmor_operation"] } == "mknod"
+      insist { subject.timestamp.iso8601 } == "2014-08-29T21:41:59Z"
     end
   end
 

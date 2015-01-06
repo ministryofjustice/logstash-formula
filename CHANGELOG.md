@@ -1,3 +1,7 @@
+## Version 1.7.x
+
+* Handle mongodb.log: mark-up and send to statsd
+
 ## Version 1.6.0
 
 * Log _grokparsefailure messages to a file for reprocessing (enabled by default)

@@ -1,0 +1,28 @@
+#2014-12-11T07:49:51.896+0000 [initandlisten] connection accepted from 10.3.33.14:40699 #76798 (2 connections now open)
+#2014-12-11T07:49:51.897+0000 [conn76798]  authenticate db: local { authenticate: 1, nonce: "xxx", user: "__system", key: "xxx" }
+#2014-12-11T07:50:09.840+0000 [clientcursormon] mem (MB) res:51 virt:5446
+#2014-12-11T07:50:09.840+0000 [clientcursormon]  mapped (incl journal view):4894
+#2014-12-11T07:50:09.840+0000 [clientcursormon]  connections:2
+#2014-12-11T07:50:09.840+0000 [clientcursormon]  replication threads:32
+#2014-12-11T07:50:21.869+0000 [conn76797] end connection 10.3.33.15:48173 (1 connection now open)
+#2014-12-11T07:50:21.870+0000 [initandlisten] connection accepted from 10.3.33.15:48176 #76799 (2 connections now open)
+#2014-12-11T07:50:21.870+0000 [conn76799]  authenticate db: local { authenticate: 1, nonce: "xxx", user: "__system", key: "xxx" }
+#2014-12-11T07:50:21.911+0000 [conn76798] end connection 10.3.33.14:40699 (1 connection now open)
+#2014-12-11T07:50:21.912+0000 [initandlisten] connection accepted from 10.3.33.14:40702 #76800 (2 connections now open)
+#2014-12-11T07:50:21.913+0000 [conn76800]  authenticate db: local { authenticate: 1, nonce: "xxx", user: "__system", key: "xxx" }
+
+MONGODB_LOG_SLOW_QUERY_COMMAND   %{MONGODB_LOG_COMMAND_OP:mongodb_log_query_operation} %{MONGO_WORDDASH:mongodb_log_query_database}\.%{MONGODB_LOG_CMD_COLLECTION:mongodb_log_query_collection} %{GREEDYDATA:mongodb_log_query_message} %{INT:mongodb_log_query_duration_ms:int}ms$
+
+MONGODB_LOG_SLOW_QUERY_BASE   %{WORD:mongodb_log_query_operation} %{MONGO_WORDDASH:mongodb_log_query_database}\.%{MONGO_WORDDASH:mongodb_log_query_collection} %{GREEDYDATA:mongodb_log_query_message} %{INT:mongodb_log_query_duration_ms:int}ms$
+
+MONGODB_LOG_BASE              %{TIMESTAMP_ISO8601:mongodb_log_timestamp} +%{GREEDYDATA:mongodb_log_message}
+
+MONGODB_LOG_CONN_TYPE_MESSAGE \[%{MONGODB_LOG_CONN_TYPE:mongodb_log_subtype}%{INT:mongodb_log_conn_number:int}\] +%{GREEDYDATA:mongodb_log_type_message}
+MONGODB_LOG_TYPE_MESSAGE      \[%{MONGODB_LOG_GENERAL_TYPE:mongodb_log_subtype}\] +%{GREEDYDATA:mongodb_log_type_message}
+MONGODB_LOG_CONN_TYPE         conn
+MONGODB_LOG_GENERAL_TYPE      [a-zA-Z0-9 ]+
+MONGODB_LOG_GENERAL_TYPE      [a-zA-Z0-9 ]+
+MONGODB_LOG_COMMAND_OP        command
+MONGODB_LOG_CMD_COLLECTION    \$cmd
+
+
