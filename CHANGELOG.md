@@ -1,3 +1,6 @@
+## Version 1.7.1
+* Pin python-daemon so that beaver installs successfully.
+
 ## Version 1.7.0
 
 * Handle mongodb.log: mark-up and send to statsd
