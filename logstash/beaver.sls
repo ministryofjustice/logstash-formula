@@ -7,12 +7,17 @@ beaver:
   pip.installed:
     - require:
       - pkg: python-pip
+      - pip: python-daemon
   service.running:
     - require:
       - pip: beaver
     - watch:
       - file: /etc/init/beaver.conf
       - file: /etc/beaver.conf
+
+python-daemon:
+  pip.installed:
+    - name: python-daemon == 1.6.1
 
 
 /etc/supervisor.d/beaver.conf:
