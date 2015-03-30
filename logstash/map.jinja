@@ -3,6 +3,7 @@
         'revision': 'v3.0.0milestone5',
         'elasticsearch': '//"+window.location.hostname.replace(/^kibana/,"elasticsearch")+(window.location.port ? ":" + window.location.port : "")+"',
         'es_index': '"kibana-int"',
+        'server_name': 'kibana.*'
     },
     'default': 'Debian',
 }, merge=salt['pillar.get']('kibana', {})) %}
@@ -63,3 +64,10 @@
     },
     'default': 'Debian',
 }, merge=salt['pillar.get']('beaver',{})) %}
+
+{% set elasticsearch = salt['grains.filter_by']({
+    'Debian': {
+      'server_name': 'elasticsearch.*'
+    },
+    'default': 'Debian',
+}, merge=salt['pillar.get']('elasticsearch.',{})) %}
