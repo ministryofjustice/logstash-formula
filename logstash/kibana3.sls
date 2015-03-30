@@ -1,4 +1,5 @@
 {% from "logstash/map.jinja" import kibana with context %}
+{% from "logstash/map.jinja" import elasticsearch with context %}
 {% from 'utils/apps/lib.sls' import app_skeleton with context %}
 
 include:
@@ -53,7 +54,7 @@ kibana.git:
     - context:
       appslug: kibana
       is_default: False
-      server_name: 'kibana.*'
+      server_name: {{ kibana.server_name }}
       root_dir: /srv/kibana/application/current/src
       index: False
     - watch_in:
@@ -73,7 +74,7 @@ kibana.git:
     - context:
       appslug: elasticsearch
       is_default: False
-      server_name: 'elasticsearch.*'
+      server_name: {{ elasticsearch.server_name }}
       proxy_host: http://localhost
       proxy_port: 9200
     - watch_in:

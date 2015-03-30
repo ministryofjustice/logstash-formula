@@ -1,4 +1,11 @@
+## Version 1.7.2
+
+* Add an ability to set `server_name` for the nginx virtual host for
+  both the Kibana  and Leasticsearch via a pillar. The default value
+  is set via `map.jinja`.
+
 ## Version 1.7.1
+
 * Pin python-daemon so that beaver installs successfully.
 
 ## Version 1.7.0
