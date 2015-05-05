@@ -1,3 +1,8 @@
+## Version 1.7.3
+
+* Add an ability to set the number of `redis_input_threads` that
+  logstash consumes from. Default is normally 1, here we have used 6.
+
 ## Version 1.7.2
 
 * Add an ability to set `server_name` for the nginx virtual host for
