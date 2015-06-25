@@ -1,4 +1,4 @@
-## Version 1.7.X
+## Version 1.7.4
 
 * Add an ability to customize the `redis_namespace`
 
