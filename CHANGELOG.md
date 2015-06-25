@@ -1,6 +1,10 @@
-## Version 1.7.4
+## Version 1.7.5
 
 * Add an ability to customize the `redis_namespace`
+
+## Version 1.7.4
+
+* Bugfix: missing trailing comma
 
 ## Version 1.7.3
 
