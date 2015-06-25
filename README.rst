@@ -89,6 +89,7 @@ Example pillar::
       redis:
         host: logstash.local
         port: 6379
+        namespace: logstash:beaver
         db: 0
 
 

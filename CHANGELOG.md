@@ -1,3 +1,7 @@
+## Version 1.7.X
+
+* Add an ability to customize the `redis_namespace`
+
 ## Version 1.7.3
 
 * Add an ability to set the number of `redis_input_threads` that
