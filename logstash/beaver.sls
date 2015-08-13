@@ -6,7 +6,6 @@ include:
 beaver:
   pip.installed:
     - require:
-      - pkg: python-pip
       - pip: python-daemon
   service.running:
     - require:

@@ -1,3 +1,8 @@
+## Version 1.7.6
+
+* Fix logstash beaver by removing the python-pip requirement that is no
+  longer required
+
 ## Version 1.7.5
 
 * Add an ability to customize the `redis_namespace`
