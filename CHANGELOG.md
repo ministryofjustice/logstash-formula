@@ -1,3 +1,7 @@
+## UNRELEASED
+
+* Add option to turn udp logging on and off (syslog:udp_enabled)
+
 ## Version 1.7.6
 
 * Fix logstash beaver by removing the python-pip requirement that is no
