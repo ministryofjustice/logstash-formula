@@ -67,6 +67,13 @@ Pillar variables
   Used to configure whether monitoring should be enabled/installed at all.
   It's useful as client side of monitoring is an implicit dependency.
 
+- syslog:udp_enabled (default True)
+
+  Used to configure whether rsyslogd should forward logs to udp. Set to true
+  by default just for compatibility reasons, but only needed if an endpoint is
+  listening there. Set this to False when using just logstash.client (without
+  logstash.server).
+
 - monitoring:ns (future)
   TODO: Monitoring shall prefix the metrics using this value.
 
