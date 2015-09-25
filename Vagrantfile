@@ -32,6 +32,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
       salt.verbose = true
       salt.minion_config = "vagrant/salt/minion"
+      salt.bootstrap_options = "-F -c /tmp -P"
       salt.run_highstate = true
 
     end
