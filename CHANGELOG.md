@@ -1,3 +1,8 @@
+## Version 1.8.0
+
+* Add pillar options to alter the clients default activated plugins
+* set bootstrap options for Vagrant env
+
 ## Version 1.7.7
 
 * Add option to turn udp logging on and off (syslog:udp_enabled)
