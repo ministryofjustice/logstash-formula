@@ -1,6 +1,6 @@
-=======
+========
 logstash
-=======
+========
 
 Formulas to set up and configure the logstash server, or ship logs into a
 central server.
@@ -72,11 +72,11 @@ Pillar variables
 
 
 ``client``
------------
+----------
 
 Install beaver for the ability to ship logs to the central logstash server over
 the redis connection specified in the pillar (with a default of localhost db
-#0)
+#0).
 
 Example usage::
 
@@ -92,9 +92,19 @@ Example pillar::
         namespace: logstash:beaver
         db: 0
 
+You can enable and disable client plugins as below, showing the default values.
+
+Enabling and disabling client plugins::
+
+   beaver:
+      activate_plugins:
+         - salt-master: True
+           salt-minion: True
+           salt-key: True
+           auditd: False
 
 ``logship`` macro
------------
+-----------------
 
 Macro to ship a given log file with beaver to central logstash server.
 
@@ -155,7 +165,7 @@ following pillar::
 
 
 Running Vagrant Tests
-============
+=====================
 
 To run the test suite under Vagrant:
 

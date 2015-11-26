@@ -62,6 +62,12 @@
             'port': 6379,
             'db': 0,
         },
+        'activate_plugins': {
+            'salt-master': True,
+            'salt-minion': True,
+            'salt-key': True,
+            'auditd': False
+        }
     },
     'default': 'Debian',
 }, merge=salt['pillar.get']('beaver',{})) %}
