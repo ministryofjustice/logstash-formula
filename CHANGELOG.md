@@ -1,3 +1,9 @@
+## UNRELEASED
+
+* Change default queue_timeout to 60 seconds.
+* Provide pillar for redis beaver queue_timeout
+
+
 ## Version 1.8.0
 
 * Add pillar options to alter the clients default activated plugins

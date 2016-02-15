@@ -98,6 +98,7 @@ Example pillar::
         port: 6379
         namespace: logstash:beaver
         db: 0
+        queue_timeout: 60
 
 You can enable and disable client plugins as below, showing the default values.
 
