@@ -4,8 +4,8 @@ include:
 
 #}
 
-{% macro logship(appshort, logfile, type='daemon', tags=['daemon','error'], format='json', delimiter='\\\\n') -%}
-{% if salt['pillar.get']('monitoring:enabled', True) %}
+{% macro logship(appshort, logfile, type='daemon', tags=['daemon','error'], format='json', delimiter='\\\\n', absent=False) -%}
+{% if salt['pillar.get']('monitoring:enabled', True) and absent == false %}
 
 {% set tags = ','.join(tags) %}
 
@@ -26,4 +26,10 @@ include:
       - file: /etc/beaver.d
 
 {% endif %}
+
+{% if absent == True %}
+/etc/beaver.d/{{appshort}}.conf:
+  file.absent
+{% endif %}
+
 {%- endmacro %}
