@@ -1,4 +1,8 @@
-## UNRELEASED
+## v1.8.2
+
+* Add absent flag on logship macro.
+
+## v1.8.1
 
 * Change default queue_timeout to 60 seconds.
 * Provide pillar for redis beaver queue_timeout
