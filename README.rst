@@ -142,6 +142,13 @@ format
 
   **Default:** ``json``
 
+absent
+  Boolean flag to force configuration file removal. Deleting a macro
+  call will not remove the configuration file on highstate. Possible
+  values: ``true`` or ``false``
+
+  **Default:** ``false``
+
 Example usage::
 
     include:
@@ -149,6 +156,7 @@ Example usage::
 
     {% from 'logstash/lib.sls' import logship with context %}
     {{ logship('redis-server.log', '/var/log/redis/redis-server.log', 'redis', ['redis','log'], 'json') }}
+    {{ logship('redis-server.log', '/var/log/redis/redis-server.log', 'redis', ['redis','log'], 'json', absent=true) }}
 
 
 apparmor
