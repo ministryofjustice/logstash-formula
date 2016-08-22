@@ -5,9 +5,9 @@ include:
 {% from 'logstash/lib.sls' import logship with context %}
 {% from "logstash/map.jinja" import beaver with context %}
 
-{% if beaver.activate_plugins.get('salt-minion', False) %}
-{{ logship('salt-minion.log', '/var/log/salt/minion', 'salt', ['salt','salt-minion','log'], 'json') }}
-{% endif %}
+# We always ignore salt-minion logs
+{{ logship('salt-minion.log', '/var/log/salt/minion', 'salt', ['salt','salt-minion','log'], 'json', absent=True) }}
+
 {% if beaver.activate_plugins.get('salt-master', False) %}
 {{ logship('salt-master.log', '/var/log/salt/master', 'salt', ['salt','salt-master','log'], 'json') }}
 {% endif %}
