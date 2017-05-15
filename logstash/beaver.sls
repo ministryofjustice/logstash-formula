@@ -8,6 +8,7 @@ beaver:
     - require:
       - pip: python-daemon
   service.running:
+    - enable: True
     - require:
       - pip: beaver
     - watch:
