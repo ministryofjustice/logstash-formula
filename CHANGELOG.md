@@ -1,6 +1,10 @@
-## UNRELEASED
+## v1.8.4
 
 * Fix: Log absent flag should notify beaver and restart if changed
+
+## v1.8.3
+
+* Disable salt-minion logging.
 
 ## v1.8.2
 
