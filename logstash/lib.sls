@@ -29,7 +29,9 @@ include:
 
 {% if absent == True %}
 /etc/beaver.d/{{appshort}}.conf:
-  file.absent
+  file.absent:
+    - watch_in:
+      - service: beaver
 {% endif %}
 
 {%- endmacro %}

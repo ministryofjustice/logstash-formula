@@ -1,3 +1,7 @@
+## UNRELEASED
+
+* Fix: Log absent flag should notify beaver and restart if changed
+
 ## v1.8.2
 
 * Add absent flag on logship macro.
