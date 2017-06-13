@@ -1,3 +1,6 @@
+{% set application=salt['grains.get']('Application', 'unknown') %}
+{% set env=salt['grains.get']('Env', 'unknown') %}
+
 {% set kibana = salt['grains.filter_by']({
     'Debian': {
         'revision': 'v3.0.0milestone5',
@@ -59,10 +62,11 @@
 {% set beaver = salt['grains.filter_by']({
     'Debian': {
         'redis': {
-            'host': 'monitoring.local',
+            'host': 'localhost',
             'port': 6379,
             'db': 0,
-            'queue_timeout': 60
+            'queue_timeout': 60,
+            'namespace': 'logstash:' + application + '-' + env
         },
         'activate_plugins': {
             'salt-master': True,

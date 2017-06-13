@@ -81,6 +81,11 @@ Pillar variables
 ``client``
 ----------
 
+.. note::
+
+    The formula sets common defaults so in most cases will only require the 
+    states to be loaded in the top.sls file.
+
 Install beaver for the ability to ship logs to the central logstash server over
 the redis connection specified in the pillar (with a default of localhost db
 #0).
