@@ -158,6 +158,26 @@ Example usage::
     {{ logship('redis-server.log', '/var/log/redis/redis-server.log', 'redis', ['redis','log'], 'json') }}
     {{ logship('redis-server.log', '/var/log/redis/redis-server.log', 'redis', ['redis','log'], 'json', absent=true) }}
 
+``stunnel_scanner``
+----------
+
+Installs a cron job that runs a scanner against containers looking for stunnel 
+certificates then logs this to a file /var/log/cron.log
+
+::
+  
+    {
+      "timestamp": "2017-06-09 18:54:01,924",
+      "name": "logstash:stunnel-scanner",
+      "level": "INFO",
+      "level_no": 20,
+      "message": "Found stunnel container envs",
+      "notAfter": "20180608153600Z",
+      "notAfterDate": "2018-06-08T15:36:00",
+      "hasExpired": "0",
+      "containerId": "a132221b843b6f293ace11233a5ed37768fbaae8c1d1744c2a1b0d1d81f71c5a",
+      "signatureAlgorithm": "ecdsa-with-SHA512"
+    }
 
 apparmor
 ========
