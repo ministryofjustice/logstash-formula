@@ -1,3 +1,8 @@
+## v1.9.0
+
+Features:
+* Add stunnel scanner
+
 ## v1.8.4
 
 * Fix: Log absent flag should notify beaver and restart if changed
