@@ -14,7 +14,7 @@ stunnel_scanner.py:
     - mode: 755
     - template: jinja
 
-cron_cleanup:
+cron_cleanup_stunnel_scanner:
   cmd.run:
     - name: crontab -l | grep -v 'stunnel_scanner.py'  | crontab -
     - require_in:
