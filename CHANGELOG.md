@@ -1,3 +1,9 @@
+## v1.9.1
+
+Fixes:
+* Make cleanup state unique
+* Set default key
+
 ## v1.9.0
 
 Features:
