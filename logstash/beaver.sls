@@ -37,6 +37,11 @@ python-daemon:
     - source: salt://logstash/templates/beaver/upstart-beaver.conf
     - template: jinja
 
+/etc/systemd/system/beaver.service:
+  file.managed:
+    - source: salt://logstash/templates/beaver/systemd-beaver.conf
+    - template: jinja
+
 /etc/apparmor.d/beaver_local:
   file.directory:
     - mode: 755
