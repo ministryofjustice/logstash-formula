@@ -1,3 +1,8 @@
+## v1.10.0
+
+Features:
+* Add systemd beaver support
+
 ## v1.9.1
 
 Fixes:
